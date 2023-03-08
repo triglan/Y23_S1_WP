@@ -16,10 +16,10 @@ int main()
 	//·£´ı°ª »ğÀÔ
 	for (int i = 0; i < COL * ROW; i++)
 	{
-		num[i / ROW][i % COL] = rand() % MAXCOUNT + 1;
+		num[i / COL][i % COL] = (rand() % MAXCOUNT) + 1;
 		for (int j = 0; j < i; j++)
 		{
-			if (num[i / ROW][i % COL] == num[j / ROW][j % COL]) {
+			if (num[i / COL][i % COL] == num[j / COL][j % COL]) {
 				i--;
 				break;
 			}
