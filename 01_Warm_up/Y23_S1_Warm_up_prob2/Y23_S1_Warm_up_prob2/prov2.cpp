@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 
-#define INPUTNUM 10
+#define INPUTNUM 30
 
 using namespace std;
 
@@ -18,6 +18,14 @@ int main()
 	{
 		randNum[i] = rand() % input + 1;
 	}
+
+	std::cout << "Generated numbers : ";
+	for (int i = 0; i < INPUTNUM - 1; i++)
+	{
+		std::cout << randNum[i] << ' ';
+	}
+	cout << endl;
+
 
 	char Command;
 	int temp = 0;
@@ -241,9 +249,10 @@ int main()
 
 			for (int i = 0; i < INPUTNUM - 1; i++)
 			{
-				std::cout << randNum[i] << ' ' << endl << endl;
+				std::cout << randNum[i] << ' ';
 			}
 
+			cout << endl << endl;
 			break; 
 		}
 	}

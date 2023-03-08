@@ -122,11 +122,12 @@ int main()
 						if (str[i - k] >= 'a' && str[i - k] <= 'z')//소문자면
 							str[i - k] = str[i - k] - 32;
 					}
-					letterCount = 0;
+					
 				}
 
-				if (str[i] == '.')
-					break;
+				letterCount = 0;
+				//if (str[i] == '.')
+				//	break;
 				if (str[i] == ' ')
 					i++;
 			}//while (str[i] != '.')
