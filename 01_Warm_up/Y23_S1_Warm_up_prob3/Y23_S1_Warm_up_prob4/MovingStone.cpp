@@ -9,8 +9,8 @@
 
 using namespace std;
 
-#define ROW 10
-#define COL 10
+#define ROW 3
+#define COL 3
 
 #define BLANK 0
 #define OStone 1
@@ -37,6 +37,8 @@ char player2Input = 0;
 
 void printBoard();
 void randomStone();
+void rand1PStone();
+void rand2PStone();
 void clearStone();
 void crashP1Stone();
 void crashP2Stone();
@@ -97,14 +99,26 @@ int main()
 					break;
 				}
 				if (p1.x < 0)
-					p1.x = 0;
-				if (p1.x >= ROW)
+				{
+					rand1PStone();
 					p1.x = ROW - 1;
+				}
+				if (p1.x >= ROW)
+				{
+					rand1PStone();
+					p1.x = 0;
+				}
 				if (p1.y < 0)
-					p1.y = 0;
-				if (p1.y >= COL)
+				{
+					rand1PStone();
 					p1.y = COL - 1;
+				}
 
+				if (p1.y >= COL)
+				{
+					rand1PStone();
+					p1.y = 0;
+				}
 			}
 		}
 		else
@@ -155,13 +169,25 @@ int main()
 					break;
 				}
 				if (p2.x < 0)
-					p2.x = 0;
-				if (p2.x >= ROW)
+				{
 					p2.x = ROW - 1;
+					rand2PStone();
+				}
+				if (p2.x >= ROW)
+				{
+					p2.x = 0;
+					rand2PStone();
+				}
 				if (p2.y < 0)
-					p2.y = 0;
-				if (p2.y >= COL)
+				{
 					p2.y = COL - 1;
+					rand2PStone();
+				}
+				if (p2.y >= COL)
+				{
+					p2.y = 0;
+					rand2PStone();
+				}
 			}
 
 		}
@@ -169,7 +195,7 @@ int main()
 			std::system("cls");
 			printBoard();
 			std::cout << endl << "프로그램 리셋 : e" << endl << "나가기 : q";
-			Sleep(200);
+			Sleep(50);
 	}
 	return 0;
 }
@@ -209,19 +235,47 @@ void clearStone()
 
 void randomStone()
 {
-	int randStone = rand() % 5 + 1;
+	rand1PStone();
+	rand2PStone();
+}
 
-	if (randStone == OStone)
-		p1.stone = 'o';
-	else if (randStone == XStone)
-		p1.stone = 'x';
-	else if (randStone == HStone)
-		p1.stone = '#';
-	else if (randStone == AStone)
-		p1.stone = '@';
-	else if (randStone == SStone)
-		p1.stone = '*';
+void rand1PStone()
+{
+	int randStone = 0;
+	while (true)
+	{
+		randStone = rand() % 5 + 1;
+		if (randStone == OStone && 'o' != p2.stone)
+		{
+			p1.stone = 'o';
+			break;
+		}
+		else if (randStone == XStone && 'x' != p2.stone)
+		{
+			p1.stone = 'x';
+			break;
+		}
+		else if (randStone == HStone && '#' != p2.stone)
+		{
+			p1.stone = '#';
+			break;
+		}
+		else if (randStone == AStone && '@' != p2.stone)
+		{
+			p1.stone = '@';
+			break;
+		}
+		else if (randStone == SStone && '*' != p2.stone)
+		{
+			p1.stone = '*';
+			break;
+		}
+	}
+}
 
+void rand2PStone()
+{
+	int randStone = 0;
 	while (true)
 	{
 		randStone = rand() % 5 + 1;
@@ -262,36 +316,7 @@ void crashP1Stone()
 	}
 	if (p1.overlapped == true)
 	{
-		int randStone = 0;
-		while (true)
-		{
-			randStone = rand() % 5 + 1;
-			if (randStone == OStone && 'o' != p2.stone)
-			{
-				p1.stone = 'o';
-				break;
-			}
-			else if (randStone == XStone && 'x' != p2.stone)
-			{
-				p1.stone = 'x';
-				break;
-			}
-			else if (randStone == HStone && '#' != p2.stone)
-			{
-				p1.stone = '#';
-				break;
-			}
-			else if (randStone == AStone && '@' != p2.stone)
-			{
-				p1.stone = '@';
-				break;
-			}
-			else if (randStone == SStone && '*' != p2.stone)
-			{
-				p1.stone = '*';
-				break;
-			}
-		}
+		rand1PStone();
 		p1.overlapped = false;
 	}
 }
@@ -305,36 +330,7 @@ void crashP2Stone()
 	}
 	if (p2.overlapped == true)
 	{
-		int randStone = 0;
-		while (true)
-		{
-			randStone = rand() % 5 + 1;
-			if (randStone == OStone && 'o' != p1.stone)
-			{
-				p2.stone = 'o';
-				break;
-			}
-			else if (randStone == XStone && 'x' != p1.stone)
-			{
-				p2.stone = 'x';
-				break;
-			}
-			else if (randStone == HStone && '#' != p1.stone)
-			{
-				p2.stone = '#';
-				break;
-			}
-			else if (randStone == AStone && '@' != p1.stone)
-			{
-				p2.stone = '@';
-				break;
-			}
-			else if (randStone == SStone && '*' != p1.stone)
-			{
-				p2.stone = '*';
-				break;
-			}
-		}
+		rand2PStone();
 		p2.overlapped = false;
 	}
 }
