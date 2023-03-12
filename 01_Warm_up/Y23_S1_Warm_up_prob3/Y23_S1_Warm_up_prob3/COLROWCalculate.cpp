@@ -37,9 +37,6 @@ int main()
 {
 	//·£´ı°ª »ğÀÔ
 	RandomInput();
-
-
-
 	char input;
 
 	while (true)
