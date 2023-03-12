@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d62156b1-cf41-43b7-b28b-498420bce2d6}</ProjectGuid>
-    <RootNamespace>Y23S1Warmupprob5</RootNamespace>
+    <ProjectGuid>{cf96ea4d-60e1-4517-b12a-a6d95eb06092}</ProjectGuid>
+    <RootNamespace>temp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,10 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Calendar.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Calendar.h" />
+    <ClCompile Include="temp.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
