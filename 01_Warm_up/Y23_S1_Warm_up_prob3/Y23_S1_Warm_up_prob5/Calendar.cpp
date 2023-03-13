@@ -17,7 +17,7 @@ using namespace std;
 string sDate;
 
 int getDay(int year, int month, int day);
-int lastDays(int year);
+int lastDays(int month, int year);
 
 void LastDaysOfYears();//마지막 날의 요일 출력
 void GetDaysOfWeek(int year, int month, int day);//요일 출력
@@ -95,12 +95,12 @@ int getDay(int year, int month, int day)
 	int K = Y % 100;
 	int J = Y / 100;
 
-	int h = ((q + 13 * (m + 1) / 5 + K + K / 4 + J / 4 + 5 * J) - 1) % 7;
+	int h = (q + 13 * (m + 1) / 5 + K + K / 4 + J / 4 + 5 * J) % 7;
 	return h;
 }
 
 //달의 마지막 날 출력
-int lastDays(int year)
+int lastDays(int month, int year)
 {
 	switch (year)
 	{
