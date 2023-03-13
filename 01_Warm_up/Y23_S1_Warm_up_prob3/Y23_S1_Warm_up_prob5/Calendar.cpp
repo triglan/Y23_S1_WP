@@ -19,7 +19,7 @@ string sDate;
 int getDay(int year, int month, int day);
 int lastDays(int month, int year);
 
-void LastDaysOfYears(int year, int month, int day);//마지막 날의 요일 출력
+void LastDaysOfYears(int year);//마지막 날의 요일 출력
 void GetDaysOfWeek(int year, int month, int day);//요일 출력
 void PrintCalendar(int year, int month, int day);//달력 출력
 
@@ -53,11 +53,22 @@ int main()
 
 		if (input[0] == 'q')
 			return 0;
+
 		else if (input[0] == 'f')
 		{
-			//LastDaysOfYears(y);
+			cin >> input;
+			for (i = 0; i < strlen(input); i++)
+			{
+
+				year = year * 10 + input[i] - 48;
+			}
+
+			LastDaysOfYears(year);
+			continue;
 		}
 
+
+		
 
 		for (i = 0; i < strlen(input); i++)
 		{
@@ -65,6 +76,12 @@ int main()
 				break;
 
 			year = year * 10 + input[i] - 48;
+		}
+
+		if (!(2000 <= year < 2030))
+		{
+			cout << "잘못된 값" << endl << endl;
+			break;
 		}
 
 		for (j = i + 1; j < strlen(input); j++)
@@ -112,10 +129,6 @@ int getDay(int year, int month, int day)
 		for (int i = 1; i < month; i++)
 		{
 			fullDay += lastDays(i, year);//1월부터 이번 달 전까지 계산
-			//if (i == 10)
-			//	fullDay += 31;
-			//else if (i == 11)
-			//	fullDay += 30;
 		}
 	}
 
@@ -148,6 +161,7 @@ int lastDays(int month, int year)
 	case 7:
 	case 8:
 	case 10:
+	case 12:
 		return 31;	
 
 	case '\2':
@@ -162,9 +176,17 @@ int lastDays(int month, int year)
 }
 
 
-void LastDaysOfYears(int year, int month, int day)//마지막 날의 요일 출력
+void LastDaysOfYears(int year)//마지막 날의 요일 출력
 {
-	
+
+	for (int i = 1; i <= 12; i++)
+	{
+		printf("%d-%2d-%2d : ", year, i, lastDays(i, year));
+		GetDaysOfWeek(year, i, lastDays(i, year));
+		cout << "\t";
+		if ((i % 4) == 0)
+			cout << endl;
+	}
 }
 
 void GetDaysOfWeek(int year, int month, int day)//요일 출력
@@ -198,22 +220,35 @@ void GetDaysOfWeek(int year, int month, int day)//요일 출력
 	default:
 		break;
 	}
-	cout << endl;
 }
 
 void PrintCalendar(int year, int month, int day)//달력 출력
 {
 	int startDay = getDay(year, month, 1) % 7;//첫날 요일 저장
 	
-	cout << "Sunday   " << "Monday   " << "Tuesday  " << "Wednesday " << "Thursday " << "Friday   " << "Saturday" << endl;
+	cout << "Sunday    " << "Monday    " << "Tuesday   " << "Wednesday  " << "Thursday  " << "Friday    " << "Saturday" << endl;
 
 	cout << "    ";
 	for (int i = 0; i < startDay; i++)
 	{
-		cout << "        ";
+		cout << "          ";
 	}
-	for (int i = 0; i < lastDays(year, month); i++)
+
+	startDay = (startDay ) % 7;
+
+	for (int i = 1; i <= lastDays(month, year); i++)
 	{
-		cout << i << "        ";
+		if(i<10)
+			cout << i << "         ";
+		else
+			cout << i << "        ";
+
+		if (((i + startDay)% 7) == 0 && i)
+		{
+			cout << endl;
+			cout << "   ";
+		}
 	}
+
+	cout << endl << endl;
 }
