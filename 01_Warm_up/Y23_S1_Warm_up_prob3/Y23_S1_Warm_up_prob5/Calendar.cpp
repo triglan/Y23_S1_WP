@@ -19,9 +19,9 @@ string sDate;
 int getDay(int year, int month, int day);
 int lastDays(int month, int year);
 
-void LastDaysOfYears();//마지막 날의 요일 출력
+void LastDaysOfYears(int year, int month, int day);//마지막 날의 요일 출력
 void GetDaysOfWeek(int year, int month, int day);//요일 출력
-void PrintCalendar();//달력 출력
+void PrintCalendar(int year, int month, int day);//달력 출력
 
 int main()
 {
@@ -33,17 +33,29 @@ int main()
 	int month = 0;
 	int day = 0;
 
-
+	char input[20] = { 0 };
 	while (true)
 	{
-		char input[20];
+		i = 0;
+		j = 0;
+		k = 0;
+
+		year = 0;
+		month = 0;
+		day = 0;
+
+		for (int i = 0; i < 20; i++)
+		{
+			input[i] = 0;
+		};
+
 		cin >> input;
 
 		if (input[0] == 'q')
 			return 0;
 		else if (input[0] == 'f')
 		{
-			LastDaysOfYears();
+			//LastDaysOfYears(y);
 		}
 
 
@@ -63,18 +75,17 @@ int main()
 			month = month * 10 + input[j] - 48;
 		}
 
-		for (int k = j + 1; k < strlen(input); k++)
+		for (k = j + 1; k < strlen(input); k++)
 		{
 			day = day * 10 + input[k] - 48;
 		}
 
-		cout << getDay(year, month, day) << endl;
 
 		GetDaysOfWeek(year, month, day);
 
 		cout << endl << endl;
 
-		PrintCalendar();//달력 출력
+		PrintCalendar(year, month, day);//달력 출력
 
 
 		
@@ -82,44 +93,64 @@ int main()
 	return 0;
 }
 
-//요일 반환
+//일 반환
 int getDay(int year, int month, int day)
 {
-	if (month < 3) {
-		year -= 1;
-		month += 12;
-	}
-	int q = day;
-	int m = month;
-	int Y = year;
-	int K = Y % 100;
-	int J = Y / 100;
+	int fullDay = 0;
 
-	int h = (q + 13 * (m + 1) / 5 + K + K / 4 + J / 4 + 5 * J) % 7;
-	return h;
+	if (year != 2000) {
+		for (int i = 0; i < year - 2000; i++)//if 2000 1월 2일
+		{
+			if (i % 4 == 0)
+				fullDay += 366;
+			else
+				fullDay += 365;
+		}
+	}
+
+	if (month != 1) {
+		for (int i = 1; i < month; i++)
+		{
+			fullDay += lastDays(i, year);//1월부터 이번 달 전까지 계산
+			//if (i == 10)
+			//	fullDay += 31;
+			//else if (i == 11)
+			//	fullDay += 30;
+		}
+	}
+
+
+	for (int i = 0; i < day; i++)
+	{
+		fullDay += 1;
+	}
+	if (year == 2000 && month == 1 && day == 1)
+		return 6;
+
+	fullDay -= 2;
+	return fullDay;//2001 1월 2일 이면 0 반환, 일요일
 }
 
 //달의 마지막 날 출력
 int lastDays(int month, int year)
 {
-	switch (year)
+	switch (month)
 	{
-	case '4':
-	case '6':
-	case '9':
-	case '11':
+	case 4:
+	case 6:
+	case 9:
+	case 11:
 		return 30;
 
-	case '1':
-	case '3':
-	case '5':
-	case '7':
-	case '8':
-	case '10':
-	case '12':
-		return 31;
+	case 1:
+	case 3:
+	case 5:
+	case 7:
+	case 8:
+	case 10:
+		return 31;	
 
-	case '2':
+	case '\2':
 		if (year % 4 == 0)
 			return 29;
 		else
@@ -131,17 +162,18 @@ int lastDays(int month, int year)
 }
 
 
-void LastDaysOfYears()//마지막 날의 요일 출력
+void LastDaysOfYears(int year, int month, int day)//마지막 날의 요일 출력
 {
-
+	
 }
 
 void GetDaysOfWeek(int year, int month, int day)//요일 출력
 {
-	int whatDay = getDay(year, month, day);
+	int whatDay = getDay(year, month, day) % 7;//
 
 	switch (whatDay)
 	{
+		break;
 	case '\0':
 		cout << "Sunday";
 		break;
@@ -169,7 +201,19 @@ void GetDaysOfWeek(int year, int month, int day)//요일 출력
 	cout << endl;
 }
 
-void PrintCalendar()//달력 출력
+void PrintCalendar(int year, int month, int day)//달력 출력
 {
+	int startDay = getDay(year, month, 1) % 7;//첫날 요일 저장
+	
+	cout << "Sunday   " << "Monday   " << "Tuesday  " << "Wednesday " << "Thursday " << "Friday   " << "Saturday" << endl;
 
+	cout << "    ";
+	for (int i = 0; i < startDay; i++)
+	{
+		cout << "        ";
+	}
+	for (int i = 0; i < lastDays(year, month); i++)
+	{
+		cout << i << "        ";
+	}
 }

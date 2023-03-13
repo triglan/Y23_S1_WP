@@ -9,8 +9,8 @@
 
 using namespace std;
 
-#define ROW 3
-#define COL 3
+#define ROW 10
+#define COL 10
 
 #define BLANK 0
 #define OStone 1
