@@ -27,14 +27,26 @@ int main()
 	int num[5] = { 0 };
 	int temp[5] = { 0 };
 
-	cout << "a, b, c, d, e의 값을 입력해 주세요 : ";
+	
 	while (true)
 	{
+		num[0] = 0; 
+		num[1] = 0;
+		num[2] = 0;
+		num[3] = 0;
+		num[4] = 0;
+
+		
+		cout << "a, b, c, d, e의 값을 입력해 주세요 : ";
 		std::cin >> num[0] >> num[1] >> num[2] >> num[3] >> num[4];
 		if (num[0] > 0 && num[0] < 100 && num[1]>0 && num[1] < 100 && num[2]>0 && num[2] < 100 && num[3]>0 && num[3] < 100 && num[4]>0 && num[4] < 100)
 			break;
 		else
+		{
 			std::cout << "잘못된 값, 다시 입력해 주세요." << std::endl;
+			cin.ignore();
+			continue;
+		}
 	}
 	cout << "연산자 : ";
 
@@ -49,10 +61,10 @@ int main()
 	PrintOperate(oper[3]);
 	cout << endl;
 	int result = 0;
-	int order = 0;
+	char order = 0;
+	bool quit = true;
 
-
-	while (true)
+	while (quit)
 	{
 		for (int i = 0; i < 5; i++)
 		{
@@ -66,7 +78,7 @@ int main()
 
 		switch (order)
 		{
-		case 1:
+		case '1':
 			
 
 		for (int i = 0; i < 4; i++)
@@ -121,7 +133,7 @@ int main()
 		cout << "Result : " << result << endl;
 			break;
 
-		case 2:
+		case '2':
 			//초기값 넣기
 			result = temp[0];
 			//앞에서부터 계산
@@ -142,7 +154,7 @@ int main()
 			cout << "Result : " << result << endl;
 			break;
 
-		case 3:
+		case '3':
 			//초기값 넣기
 			result = temp[4];
 			//뒤에서부터 계산
@@ -163,16 +175,20 @@ int main()
 			cout << "Result : " << result << endl;
 			break;
 
-		case 4:
+		case '4':
 
 			cout << "a, b, c, d, e의 값을 입력해 주세요 : ";
 			while (true)
 			{
+				cin.ignore();
 				std::cin >> num[0] >> num[1] >> num[2] >> num[3] >> num[4];
 				if (num[0] > 0 && num[0] < 100 && num[1]>0 && num[1] < 100 && num[2]>0 && num[2] < 100 && num[3]>0 && num[3] < 100 && num[4]>0 && num[4] < 100)
 					break;
 				else
+				{
 					std::cout << "잘못된 값, 다시 입력해 주세요." << std::endl;
+					continue;
+				}
 			}
 			cout << "연산자 : ";
 
@@ -191,10 +207,13 @@ int main()
 			break;
 
 		case'q':
-
+			quit = false;
+			cin.ignore();
 			return 0;
 
 		default:
+			std::cout << "잘못된 값, 다시 입력해 주세요." << std::endl;
+			cin.ignore();
 			break;
 		}
 	}
