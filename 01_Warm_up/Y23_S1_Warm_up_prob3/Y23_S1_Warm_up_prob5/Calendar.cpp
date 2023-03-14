@@ -78,33 +78,34 @@ int main()
 			year = year * 10 + input[i] - 48;
 		}
 
-		if (!(2000 <= year < 2030))
+		if (2000 <= year && year < 2030)
+		{
+			for (j = i + 1; j < strlen(input); j++)
+			{
+				if (input[j] == '/')
+					break;
+
+				month = month * 10 + input[j] - 48;
+			}
+
+			for (k = j + 1; k < strlen(input); k++)
+			{
+				day = day * 10 + input[k] - 48;
+			}
+
+
+			GetDaysOfWeek(year, month, day);
+
+			cout << endl << endl;
+
+			PrintCalendar(year, month, day);//달력 출력
+
+		}
+		else
 		{
 			cout << "잘못된 값" << endl << endl;
-			break;
+			continue;
 		}
-
-		for (j = i + 1; j < strlen(input); j++)
-		{
-			if (input[j] == '/')
-				break;
-
-			month = month * 10 + input[j] - 48;
-		}
-
-		for (k = j + 1; k < strlen(input); k++)
-		{
-			day = day * 10 + input[k] - 48;
-		}
-
-
-		GetDaysOfWeek(year, month, day);
-
-		cout << endl << endl;
-
-		PrintCalendar(year, month, day);//달력 출력
-
-
 		
 	}
 	return 0;
