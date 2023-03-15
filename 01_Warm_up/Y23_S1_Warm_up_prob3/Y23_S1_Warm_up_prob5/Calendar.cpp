@@ -57,10 +57,17 @@ int main()
 		else if (input[0] == 'f')
 		{
 			cin >> input;
+
 			for (i = 0; i < strlen(input); i++)
 			{
 
 				year = year * 10 + input[i] - 48;
+			}
+
+			if (year < 2000 || year>2030)
+			{
+				cout << "ERROR" << endl;
+				continue;
 			}
 
 			LastDaysOfYears(year);

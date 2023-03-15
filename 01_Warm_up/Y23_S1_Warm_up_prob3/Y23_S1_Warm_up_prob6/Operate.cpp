@@ -26,6 +26,7 @@ int main()
 
 	int num[5] = { 0 };
 	int temp[5] = { 0 };
+	int first = 0;
 
 	
 	while (true)
@@ -90,14 +91,21 @@ int main()
 			}
 		}
 
-		for (int i = 0; i < 3; i++)
-		{//덧뺼셈
-			//초기값 먼저 0이면 for루프 다돌아서 i++
-			if (temp[i] != 0)
-				result = temp[i];
+		first = 0;
+		//초기값 먼저 0이면 for루프 다돌아서 i++
+		for (first = 0; first < 4; first++)
+		{
+			if (temp[first] != 0)
+			{
+				result = temp[first];
+				break;
+			}
+		}
 
+		for (int i = first; i < 4; i++)
+		{
 			if (oper[i] == ADD)
-			{//+이면
+			{
 				while (true)
 				{
 					if (temp[i + 1] != 0)
@@ -105,15 +113,14 @@ int main()
 						result += temp[i + 1];
 						break;
 					}
-					else if (oper[i] != SUB)//뺄셈이면
+					else if (oper[i] == SUB)//뺄셈이면
 						break;
 					else//0이면 i++로 0이 아닌 값을 찾을 때까지 검사
 						i++;
 				}
 			}
-
-			if (oper[i] == SUB)
-			{//-이면
+			else if (oper[i] == SUB)
+			{
 				while (true)
 				{
 					if (temp[i + 1] != 0)
@@ -121,15 +128,16 @@ int main()
 						result -= temp[i + 1];
 						break;
 					}
-					else if (oper[i] != SUB)//뺄셈이면
+					else if (oper[i] == ADD)//덧셈이면
 						break;
 					else//0이면 i++로 0이 아닌 값을 찾을 때까지 검사
 						i++;
 				}
-			}
 
-			i++;
+			}
 		}
+
+
 		cout << "Result : " << result << endl;
 			break;
 
