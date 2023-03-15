@@ -20,7 +20,7 @@ int main()
 			cout << "명령어(모양, 너비) : ";
 			cin >> shape >> x;
 
-			if (x > 0 && x < 20 && shape > 0 && shape <= 6 && x % 2 == 0)
+			if (x > 0 && x <= 20 && shape > 0 && shape <= 6 && x % 2 == 0)
 				break;
 			else
 				cout << "다시 입력하세요" << endl;

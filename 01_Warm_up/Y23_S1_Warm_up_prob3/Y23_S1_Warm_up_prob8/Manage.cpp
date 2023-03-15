@@ -51,7 +51,7 @@ int main()
 			while (true)
 			{
 				AContinue = true;
-
+				num++;
 				cout << "이름/ID/생일/1~6달 출석 횟수 : ";
 				cin >> name;
 				if (name[5] != 0)
@@ -127,7 +127,6 @@ int main()
 				if (AContinue == false)
 					continue;
 
-				num++;
 				break;
 			}
 
