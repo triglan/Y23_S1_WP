@@ -100,7 +100,16 @@ int main()
 				day = day * 10 + input[k] - 48;
 			}
 
-
+			if (month < 0 || month>12)
+			{
+				cout << "ERROR\n";
+				continue;
+			}
+			if (lastDays(month, year) == 0)
+			{
+				cout << "ERROR\n";
+				continue;
+			}
 			GetDaysOfWeek(year, month, day);
 
 			cout << endl << endl;
@@ -172,7 +181,7 @@ int lastDays(int month, int year)
 	case 12:
 		return 31;	
 
-	case '\2':
+	case 2:
 		if (year % 4 == 0)
 			return 29;
 		else

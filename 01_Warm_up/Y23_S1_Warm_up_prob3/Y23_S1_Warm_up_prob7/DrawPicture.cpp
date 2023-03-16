@@ -12,15 +12,18 @@ void DoubleRec(int x);
 int main()
 {
 	int x;
-	int shape;
+	char shape;
 	while (true)
 	{
 		while (true)
 		{
 			cout << "명령어(모양, 너비) : ";
-			cin >> shape >> x;
+			cin >> shape;
+			if (shape == 'q')
+				return 0;
+			cin >> x;
 
-			if (x > 0 && x <= 20 && shape > 0 && shape <= 6 && x % 2 == 0)
+			if (x > 0 && x <= 20 && shape > '0' && shape <= '6' && x % 2 == 0)
 				break;
 			else
 				cout << "다시 입력하세요" << endl;
@@ -29,28 +32,31 @@ int main()
 //나비는 x칸 그대로
 		switch (shape)
 		{
-		case 1:
+		case '1':
 			PrintX(x);
 			break;
-		case 2:
+		case '2':
 			RTriangle(x);
 			break;
-		case 3:
+		case '3':
 			diamond(x - 1);
 			break;
-		case 4:
+		case '4':
 			ButterFly(x);
 			break;
-		case 5:
+		case '5':
 			SandClock(x);
 			break;
 
-		case 6:
+		case '6':
 			DoubleRec(x);
 			break;
 
+		case 'q':
+			return 0;
+
 		default:
-			break;
+			return 0;
 		}
 	}
 

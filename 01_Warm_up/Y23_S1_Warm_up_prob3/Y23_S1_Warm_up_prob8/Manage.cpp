@@ -18,6 +18,7 @@ int lastDays(int month);
 void ERROR();
 void PrecedeMem();
 void PrintMem(int number);
+void swap(int& a, int& b);
 
 int main()
 {
@@ -34,6 +35,7 @@ int main()
 	int Min;
 	int Minmem;
 	int CheckCount[6] = { 0 };
+
 
 	bool AContinue = true;
 
@@ -52,6 +54,7 @@ int main()
 			{
 				AContinue = true;
 				num++;
+
 				cout << "이름/ID/생일/1~6달 출석 횟수 : ";
 				cin >> name;
 				if (name[5] != 0)
@@ -121,7 +124,7 @@ int main()
 						AContinue = false;
 					}
 					
-					m[num].enter[enterMonth] = enter;
+					m[num].enter[enterMonth - 1] = enter;
 				}
 
 				if (AContinue == false)
@@ -242,19 +245,18 @@ int main()
 				for (int j = 0; j <= num; j++)
 				{
 					if (m[j].name[0] > m[i].name[0])	//앞 숫자가 뒤보다 높을 때 바꿈
-						swap(m[j].rank, m[i].rank);
+					{
+						member temp = m[i];
+						m[i] = m[j];
+						m[j] = temp;
+					}
 				}
 			}
 
 			for (int i = 0; i <= num; i++)
 			{
-				for (int ranking = 0; ranking <= num; ranking++)
-				{
-					if (m[ranking].rank == (num - i))
-						PrintMem(ranking);
-				}
+				PrintMem(i);
 			}
-
 			break;
 		case 'j':
 		case 'J':
@@ -267,18 +269,18 @@ int main()
 			{
 				for (int j = 0; j <= num; j++)
 				{
-					if (m[j].id > m[i].id)	//앞 숫자가 뒤보다 높을 때 바꿈
-						swap(m[j].rank, m[i].rank);
+					if (m[i].id < m[j].id)	//앞 숫자가 뒤보다 높을 때 바꿈
+					{
+						member temp = m[i];
+						m[i] = m[j];
+						m[j] = temp;
+					}
 				}
 			}
 
 			for (int i = 0; i <= num; i++)
 			{
-				for (int ranking = 0; ranking <= num; ranking++)
-				{
-					if (m[ranking].rank == (num - i))
-						PrintMem(ranking);
-				}
+				PrintMem(i);
 			}
 			break;
 
@@ -294,17 +296,17 @@ int main()
 				for (int j = 0; j <= num; j++)
 				{
 					if (m[j].bd > m[i].bd)	//앞 숫자가 뒤보다 높을 때 바꿈
-						swap(m[j].rank, m[i].rank);
+					{
+						member temp = m[i];
+						m[i] = m[j];
+						m[j] = temp;
+					}
 				}
 			}
 
 			for (int i = 0; i <= num; i++)
 			{
-				for (int ranking = 0; ranking <= num; ranking++)
-				{
-					if (m[ranking].rank == i)
-						PrintMem(ranking);
-				}
+				PrintMem(i);
 			}
 			break;
 
@@ -404,4 +406,10 @@ void PrecedeMem()
 	m[2].enter[5] = 6;
 
 	num = 2;
+}
+
+void swap(int& a, int& b) {
+	int temp = a;
+	a = b;
+	b = temp;
 }

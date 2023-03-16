@@ -27,7 +27,8 @@ int main()
 	int num[5] = { 0 };
 	int temp[5] = { 0 };
 	int first = 0;
-
+	int count[5] = { 0 };
+	int Endcount[5] = { 0 };
 	
 	while (true)
 	{
@@ -64,7 +65,11 @@ int main()
 	int result = 0;
 	char order = 0;
 	bool quit = true;
-
+	for (int i = 0; i < 5; i++)
+	{
+		count[i] = 0;
+		Endcount[i] = 0;
+	}
 	while (quit)
 	{
 		for (int i = 0; i < 5; i++)
@@ -138,7 +143,18 @@ int main()
 		}
 
 
-		cout << "Result : " << result << endl;
+
+		std::cout << "Result : ";
+		std::cout << num[0];
+		PrintOperate(oper[0]);
+		std::cout << num[1];
+		PrintOperate(oper[1]);
+		std::cout << num[2];
+		PrintOperate(oper[2]);
+		std::cout << num[3];
+		PrintOperate(oper[3]);
+		std::cout << num[4] << " = ";
+		std::cout << result << endl;
 			break;
 
 		case '2':
@@ -159,7 +175,17 @@ int main()
 					cout << "OPERATING_ERROR" << endl;
 
 			}
-			cout << "Result : " << result << endl;
+			std::cout << "Result : " << "(((";
+			std::cout << num[0];
+			PrintOperate(oper[0]);
+			std::cout << num[1] << ")";
+			PrintOperate(oper[1]);
+			std::cout << num[2] << ")";
+			PrintOperate(oper[2]);
+			std::cout << num[3] << ")";
+			PrintOperate(oper[3]);
+			std::cout << num[4] << " = ";
+			std::cout << result << endl;
 			break;
 
 		case '3':
@@ -180,7 +206,18 @@ int main()
 					cout << "OPERATING_ERROR" << endl;
 
 			}
-			cout << "Result : " << result << endl;
+			std::cout << "Result : " << "";
+			std::cout << num[0];
+			PrintOperate(oper[0]);
+			std::cout << "(" << num[1];
+			PrintOperate(oper[1]);
+			std::cout << "(" << num[2];
+			PrintOperate(oper[2]);
+			std::cout << "(" << num[3];
+			PrintOperate(oper[3]);
+			std::cout << num[4] <<")))" << " = ";
+			std::cout << result << endl;
+
 			break;
 
 		case '4':
