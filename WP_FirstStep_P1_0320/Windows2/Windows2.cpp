@@ -20,7 +20,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevIsntace, LPSTR lpszCmdPar
 	WndClass.cbClsExtra = 0;
 	WndClass.cbWndExtra = 0;
 	WndClass.hInstance = hInstance;
-	WndClass.hIcon = LoadCursor(NULL, IDI_APPLICATION);
+	WndClass.hIcon = LoadCursor(NULL, IDI_HAND);
 	WndClass.hCursor = LoadCursor(NULL, IDC_HAND);
 	WndClass.hbrBackground = (HBRUSH)GetStockObject(GRAY_BRUSH);
 	WndClass.lpszMenuName = NULL;
