@@ -4,7 +4,7 @@
 
 HINSTANCE g_hInst;
 LPCTSTR lpszClass = L"Window Class Name";
-LPCTSTR lpszWindowName = L"windows program 1";
+LPCTSTR lpszWindowName = L"Window Programming 2 3";
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
 
@@ -29,7 +29,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevIsntace, LPSTR lpszCmdPar
 	WndClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 	RegisterClassEx(&WndClass);
 
-	hWnd = CreateWindow(lpszClass, lpszWindowName, WS_OVERLAPPEDWINDOW, 0, 0, 800, 600, NULL, (HMENU)NULL, hInstance, NULL);
+	hWnd = CreateWindow(lpszClass, lpszWindowName, WS_OVERLAPPEDWINDOW, 600, 300, 800, 600, NULL, (HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 
@@ -43,18 +43,40 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevIsntace, LPSTR lpszCmdPar
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	PAINTSTRUCT ps;
-	HDC hDC;
+	HDC hdc;
+	RECT rect;
 
+	TCHAR lpOut[100];
 	srand(time(NULL));
-	int x1 = rand() % 50;
 
+	int x = rand() % 701;
+	int y = rand() % 501;
+	int n;	
+	int count = rand() % 41 + 10;
+	int r1 = rand() % 257, g1 = rand() % 257, b1 = rand() % 257;
+	int br1 = rand() % 257, bg1 = rand() % 257, bb1 = rand() % 257;
+
+	int i;
+	for (i = 0; i < count; i++)
+	{
+		n = rand() % 10;
+		lpOut[i] = n + 48;
+	}
 	switch (uMsg)
 	{
 	case WM_CREATE:
 		break;
 	case WM_PAINT:
-		hDC = BeginPaint(hWnd, &ps);
+		hdc = BeginPaint(hWnd, &ps);
 
+		rect.left = x;
+		rect.top = y;
+		rect.right = x+100;
+		rect.bottom = y+100;
+		SetBkColor(hdc, RGB(br1, bg1, bb1));
+		SetTextColor(hdc, RGB(r1, g1, b1));
+		//wsprintf(lpOut, L"abcdefghijklmnopqrstuvwxyzsl;gjreghioilajsdajsufhoefhweioufbhoabcdefghij");
+		DrawText(hdc, lpOut, i, &rect, DT_WORDBREAK | DT_CENTER | DT_EDITCONTROL); //--- 한 라인, 수직/수평 중앙=
 
 		EndPaint(hWnd, &ps);
 		break;
