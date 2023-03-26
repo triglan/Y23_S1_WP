@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P2_1_PrintText", "WP_P2_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P2_2_DivisionScreen", "WP_P2_2_DivisionScreen\WP_P2_2_DivisionScreen.vcxproj", "{BEFE12A4-7395-4997-87EB-422B99DC3E33}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P2_3_DrawText", "WP_P2_3_DrawText\WP_P2_3_DrawText.vcxproj", "{6742D4CE-418E-4F39-B1E7-BE34591D623D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{BEFE12A4-7395-4997-87EB-422B99DC3E33}.Release|x64.Build.0 = Release|x64
 		{BEFE12A4-7395-4997-87EB-422B99DC3E33}.Release|x86.ActiveCfg = Release|Win32
 		{BEFE12A4-7395-4997-87EB-422B99DC3E33}.Release|x86.Build.0 = Release|Win32
+		{6742D4CE-418E-4F39-B1E7-BE34591D623D}.Debug|x64.ActiveCfg = Debug|x64
+		{6742D4CE-418E-4F39-B1E7-BE34591D623D}.Debug|x64.Build.0 = Debug|x64
+		{6742D4CE-418E-4F39-B1E7-BE34591D623D}.Debug|x86.ActiveCfg = Debug|Win32
+		{6742D4CE-418E-4F39-B1E7-BE34591D623D}.Debug|x86.Build.0 = Debug|Win32
+		{6742D4CE-418E-4F39-B1E7-BE34591D623D}.Release|x64.ActiveCfg = Release|x64
+		{6742D4CE-418E-4F39-B1E7-BE34591D623D}.Release|x64.Build.0 = Release|x64
+		{6742D4CE-418E-4F39-B1E7-BE34591D623D}.Release|x86.ActiveCfg = Release|Win32
+		{6742D4CE-418E-4F39-B1E7-BE34591D623D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
