@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <tchar.h>
-#include<stdio.h>
+#include <stdio.h>
 
 HINSTANCE g_hInst;
 LPCTSTR lpszClass = L"Window Class Name";
@@ -34,7 +34,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevIsntace, LPSTR lpszCmdPar
 	UpdateWindow(hWnd);
 
 	while (GetMessage(&Message, 0, 0, 0)) {
-		TranslateMessage(&Message);
+		TranslateMessage(&Message);	
 		DispatchMessage(&Message);
 	}
 	return Message.wParam;
@@ -46,7 +46,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	PAINTSTRUCT ps;
 	HDC hdc;
 	static TCHAR str[100];
-	static TCHAR cal[100];
+
+	TCHAR cal[100];
 	static int count;
 
 	static int x;
@@ -54,6 +55,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static int n;
 	static int m;
 
+	static bool bCal = false;
+	static bool NotValid = false;
 
 	static int yPos = 0;
 
@@ -70,6 +73,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_CHAR:
 		hdc = GetDC(hwnd);
+		NotValid = true;
+
 		if (wParam == VK_BACK) //--- 백스페이스를 입력하면
 			count--; //--- 한 칸 삭제
 		else if (wParam == VK_RETURN) //--- 엔터키를 입력하면: 문자열을 다음줄에 출력
@@ -79,6 +84,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			int i, j, k, l;
 			x = 0;
 			y = 0;
+			m = 0;
+			n = 0;
 			for (i = 0; i < lstrlen(str); i++)
 			{
 				if (str[i] == ' ')
@@ -103,6 +110,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					break;
 				m = m * 10 + str[l] - 48;
 			}
+			bCal = true;
+		}
+		else if (wParam == 'q')
+		{
+			PostQuitMessage(0);
+			break;
+
 		}
 		else
 			str[count++] = wParam; //--- 그 외에는 문자를 문자열 맨 뒤에 붙인다.
@@ -118,11 +132,29 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
 		GetTextExtentPoint32(hdc, str, lstrlen(str), &size); //--- 문자열 길이 알아내기
-		TextOut(hdc, x, y, str, lstrlen(str));
-		//SetCaretPos(x + size.cx, y); //--- x,y 위치에 캐럿 위치하기
+
+		TextOut(hdc, 0, 0, str, lstrlen(str));//출력
+
 		SetCaretPos(size.cx, 0); //--- 캐럿 위치하기
-		EndPaint
-		(hwnd, &ps);
+
+
+		if (bCal)
+		{
+
+			if (n > 20 || n <= 0 || m <= 0 || m > 30)
+			{
+				TextOut(hdc, 0, 30, L"잘못된 값.", 6);//출력
+				break;
+			}
+
+			for (int i = 0; i < m; i++)
+			{
+				wsprintf(cal, L"%d * %d = %d", n, i + 1, n * (i + 1));
+				TextOut(hdc, x, y + 20 * i, cal, lstrlen(cal));//출력
+			}
+		}
+		//SetCaretPos(x + size.cx, y); //--- x,y 위치에 캐럿 위치하기
+		EndPaint(hwnd, &ps);
 		break;
 	case WM_DESTROY:
 		HideCaret(hwnd); //--- 캐럿 숨기기

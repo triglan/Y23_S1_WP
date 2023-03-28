@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33328.57
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_BasicInput_P2_0327", "WP_BasicInput_P2_0327\WP_BasicInput_P2_0327.vcxproj", "{B260468C-7CEC-4945-9263-7C6C1D67A453}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P2_6_Notepad", "P2_6_Notepad\P2_6_Notepad.vcxproj", "{16802F71-754D-459B-BAB3-A37DB348B350}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_BasicInput_P2_0327", "P2_5_BasicInput\WP_BasicInput_P2_0327.vcxproj", "{B260468C-7CEC-4945-9263-7C6C1D67A453}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +15,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16802F71-754D-459B-BAB3-A37DB348B350}.Debug|x64.ActiveCfg = Debug|x64
+		{16802F71-754D-459B-BAB3-A37DB348B350}.Debug|x64.Build.0 = Debug|x64
+		{16802F71-754D-459B-BAB3-A37DB348B350}.Debug|x86.ActiveCfg = Debug|Win32
+		{16802F71-754D-459B-BAB3-A37DB348B350}.Debug|x86.Build.0 = Debug|Win32
+		{16802F71-754D-459B-BAB3-A37DB348B350}.Release|x64.ActiveCfg = Release|x64
+		{16802F71-754D-459B-BAB3-A37DB348B350}.Release|x64.Build.0 = Release|x64
+		{16802F71-754D-459B-BAB3-A37DB348B350}.Release|x86.ActiveCfg = Release|Win32
+		{16802F71-754D-459B-BAB3-A37DB348B350}.Release|x86.Build.0 = Release|Win32
 		{B260468C-7CEC-4945-9263-7C6C1D67A453}.Debug|x64.ActiveCfg = Debug|x64
 		{B260468C-7CEC-4945-9263-7C6C1D67A453}.Debug|x64.Build.0 = Debug|x64
 		{B260468C-7CEC-4945-9263-7C6C1D67A453}.Debug|x86.ActiveCfg = Debug|Win32

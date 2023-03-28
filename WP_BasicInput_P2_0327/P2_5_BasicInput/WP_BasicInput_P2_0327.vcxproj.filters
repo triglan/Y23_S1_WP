@@ -3,6 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Multiplication_Table.cpp" />
     <ClCompile Include="EnterDelete_NextLine.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="소스.cpp" />
   </ItemGroup>
 </Project>
