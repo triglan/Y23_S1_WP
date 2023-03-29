@@ -56,15 +56,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	srand(time(NULL));
 	randDivX = rand() % 9 + 2;
-	randDivY = rand() % 9 + 2;
-
 	randDivY = randDivX / 2 + 2;
-	int dx = 760 / randDivX;
-	int dy = 560 / randDivY;
 
 	static TCHAR str[100][1000];
 	int r1, g1, b1;
 	int r2, g2, b2;
+
+	int dx = 760 / randDivX;
+	int dy = 560 / randDivY;
 
 	for (int i = 0; i < 10000; i++)
 	{
@@ -99,106 +98,136 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				}
 
 				
-					switch (randPicture[Bigy * randDivX + Bigx])
+				switch (randPicture[Bigy * randDivX + Bigx])
+				{
+				case 0:	//X
+					for (int y = 0; y < dy / 16; y++)
 					{
-					case 0:	//X
-						for (int y = 0; y < dy / 16; y++)
+						for (int x = 0; x < dx / 8; x++)
 						{
-							for (int x = 0; x < dx / 8; x++)
-							{
-								if (x == y || x == (dy / 16 - y - 1))
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
-								else
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
-							}
+							if (x == y || x == (dy / 16 - y - 1))
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+							else
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
 						}
-						break;
-					case 1:	//삼각형
-						for (int y = 0; y < dy / 16; y++)
-						{
-							for (int x = 0; x < dx / 8; x++)
-							{
-								if (x > y && x < (dy / 8 - y - 1))
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
-								else
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
-							}
-						}
-						break;
-					case 2: // diamond
-						for (int y = 0; y < dy / 32; y++)
-						{
-							for (int x = 0; x < dx / 8; x++)
-							{
-								if (x >= dy / 16 - y && 
-									x <= dy / 16 + y)
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
-								else
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
-							}
-						}
-						for (int y = dy / 32; y < dy / 16; y++)
-						{
-							for (int x = 0; x < dx / 8; x++)
-							{
-								if (x > y && 
-									x < (dy / 8 - y - 1))
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
-								else
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
-							}
-						}
-
-					case 3://butterFly
-						for (int y = 0; y < dy / 32; y++)
-						{
-							for (int x = 0; x < dx / 8; x++)
-							{
-								if ((x <= y ||
-									x > dy / 16 - y - 1) && x < dy / 16 + 1)
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
-								else
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
-							}
-						}
-						for (int y = dy / 32; y < dy / 16; y++)
-						{
-							for (int x = 0; x < dx / 8; x++)
-							{
-								if ((x >= 0 && x < dy / 16 - y) ||
-									(x > y && x <= dy / 16))
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
-								else
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
-							}
-						}
-
-					case 4: // SandClock
-						for (int y = 0; y < dy / 32; y++)
-						{
-							for (int x = 0; x < dx / 8; x++)
-							{
-								if ((y < x &&
-									x > dy / 16 - y) && x < dy / 16 + 1)
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
-								else
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
-							}
-						}
-						for (int y = dy / 32; y < dy / 16; y++)
-						{
-							for (int x = 0; x < dx / 8; x++)
-							{
-								if ((x >= 0 && x < dy / 16 - y) ||
-									(x > y && x <= dy / 16))
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
-								else
-									TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
-							}
-						}
-					default:
-						break;
 					}
+					break;
+				case 1:	//삼각형
+					for (int y = 0; y < dy / 16; y++)
+					{
+						for (int x = 0; x < dx / 8; x++)
+						{
+							if (x > y && x < (dy / 8 - y - 1))
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+							else
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
+						}
+					}
+					break;
+				case 2: // diamond
+					for (int y = 0; y < dy / 32; y++)
+					{
+						for (int x = 0; x < dx / 8; x++)
+						{
+							if (x >= dy / 16 - y &&
+								x <= dy / 16 + y)
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+							else
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
+						}
+					}
+					for (int y = dy / 32; y < dy / 16; y++)
+					{
+						for (int x = 0; x < dx / 8; x++)
+						{
+							if (x > y &&
+								x < (dy / 8 - y - 1))
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+							else
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
+						}
+					}
+
+				case 3://butterFly
+					for (int y = 0; y < dy / 32; y++)
+					{
+						for (int x = 0; x < dx / 8; x++)
+						{
+							if ((x <= y ||
+								x > dy / 16 - y - 1) && x < dy / 16 + 1)
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+							else
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
+						}
+					}
+					for (int y = dy / 32; y < dy / 16; y++)
+					{
+						for (int x = 0; x < dx / 8; x++)
+						{
+							if ((x >= 0 && x < dy / 16 - y) ||
+								(x > y && x <= dy / 16))
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+							else
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
+						}
+					}
+
+				case 4: // SandClock
+					for (int y = 0; y < dy / 32; y++)
+					{
+						for (int x = 0; x < dx / 8; x++)
+						{
+							if ((y <= x &&
+								x < dy / 16 - y) && x < dy / 16 + 1)
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+							else
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
+						}
+					}//x > y && x < (dy / 8 - y - 1)
+					for (int y = dy / 32; y < dy / 16; y++)
+					{
+						for (int x = 0; x < dx / 8; x++)
+						{
+							if ((dy / 16 - y - 1 <= x &&
+								x < y + 1) && x < dy / 16 + 1)
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+							else
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
+						}
+					}
+					break;
+
+				case 5://double Rect
+					for (int y = 0; y < dy / 16; y++)
+					{
+						for (int x = 0; x < dx / 8; x++)
+						{
+							if (x == 0 || x == dy / 32 || x == dy / 32 + 1 || x == dy / 16)
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+							else
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
+						}
+					}
+					for (int x = 0; x < dx / 8; x++)
+					{
+						if (x < dy / 16 + 1)
+							TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy), ystr, 1);//출력
+						else
+							TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy), nstr, 2);//출력
+					}
+					for (int x = 0; x < dx / 8; x++)
+					{
+						if (x < dy / 16 + 1)
+							TextOut(hdc, (Bigx * dx) + x * 8, ((Bigy + 1) * dy - 16), ystr, 1);//출력
+						else
+							TextOut(hdc, (Bigx * dx) + x * 8, ((Bigy + 1) * dy - 16), nstr, 2);//출력
+					}
+
+
+					break;
+				default:
+					break;
+				}
 					
 
 			}
