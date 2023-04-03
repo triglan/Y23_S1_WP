@@ -61,12 +61,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	static TCHAR str[100][1000];
 
-	//int tdx = dx * 0.1;
-	//int tdy = dy * 0.1;
-	//
-	//int ndx = dx * 0.9;
-	//int ndy = dy * 0.9;
-	
 	int r1, g1, b1;
 	int r2, g2, b2;
 
@@ -85,11 +79,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			for (int Bigx = 0; Bigx < randDivX; Bigx++)
 			{
 				//Box
-				/*
-					TODO : 
-					1. 공백과 문자로 문자열을 채워넣어서 만든다.
-					2. 배경을 먼저 그리고 문자만 따로 그린다.
-				*/
 				{
 					r1 = rand() % 257, g1 = rand() % 257, b1 = rand() % 257;
 					r2 = rand() % 257, g2 = rand() % 257, b2 = rand() % 257;
