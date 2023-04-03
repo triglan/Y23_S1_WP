@@ -45,6 +45,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static SIZE size;
 	PAINTSTRUCT ps;
 	HDC hdc;
+
 	static TCHAR str[100][100];
 	static TCHAR Rstr[10][100];
 	static int strcount = 0;

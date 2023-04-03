@@ -4,5 +4,6 @@
     <ClCompile Include="notepad.cpp" />
     <ClCompile Include="temppad.cpp" />
     <ClCompile Include="NewPad.cpp" />
+    <ClCompile Include="NnewPad.cpp" />
   </ItemGroup>
 </Project>
