@@ -3,7 +3,7 @@
 #include <time.h>
 #include <stdio.h>
 
-#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 HINSTANCE g_hInst;
 LPCTSTR lpszClass = L"Window Class Name";
@@ -71,6 +71,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 
 	TCHAR ystr[100] = { 'X' };
+	TCHAR bstr[100] = { 'O' };
+	TCHAR cstr[100] = { 'X' };
+	TCHAR dstr[100] = { 'O' };
+	TCHAR estr[100] = { 'X' };
+	TCHAR fstr[100] = { 'O' };
 	TCHAR nstr[100] = { ' ', ' '};
 
 	switch (uMsg)
@@ -118,7 +123,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						for (int x = 0; x < dx / 8; x++)
 						{
 							if (x > y && x < (dy / 8 - y - 1))
-								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, bstr, 1);//출력
 							else
 								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
 						}
@@ -131,7 +136,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						{
 							if (x >= dy / 16 - y &&
 								x <= dy / 16 + y)
-								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, cstr, 1);//출력
 							else
 								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
 						}
@@ -142,12 +147,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						{
 							if (x > y &&
 								x < (dy / 8 - y - 1))
-								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, cstr, 1);//출력
 							else
 								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
 						}
 					}
-
+					break;
 				case 3://butterFly
 					for (int y = 0; y < dy / 32; y++)
 					{
@@ -155,7 +160,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						{
 							if ((x <= y ||
 								x > dy / 16 - y - 1) && x < dy / 16 + 1)
-								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, dstr, 1);//출력
 							else
 								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
 						}
@@ -166,12 +171,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						{
 							if ((x >= 0 && x < dy / 16 - y) ||
 								(x > y && x <= dy / 16))
-								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, dstr, 1);//출력
 							else
 								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
 						}
 					}
-
+					break;
 				case 4: // SandClock
 					for (int y = 0; y < dy / 32; y++)
 					{
@@ -179,7 +184,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						{
 							if ((y <= x &&
 								x < dy / 16 - y) && x < dy / 16 + 1)
-								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, estr, 1);//출력
 							else
 								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
 						}
@@ -190,7 +195,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						{
 							if ((dy / 16 - y - 1 <= x &&
 								x < y + 1) && x < dy / 16 + 1)
-								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, estr, 1);//출력
 							else
 								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
 						}
@@ -203,7 +208,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						for (int x = 0; x < dx / 8; x++)
 						{
 							if (x == 0 || x == dy / 32 || x == dy / 32 + 1 || x == dy / 16)
-								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, ystr, 1);//출력
+								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, fstr, 1);//출력
 							else
 								TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy) + y * 16, nstr, 2);//출력
 						}
@@ -211,14 +216,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					for (int x = 0; x < dx / 8; x++)
 					{
 						if (x < dy / 16 + 1)
-							TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy), ystr, 1);//출력
+							TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy), fstr, 1);//출력
 						else
 							TextOut(hdc, (Bigx * dx) + x * 8, (Bigy * dy), nstr, 2);//출력
 					}
 					for (int x = 0; x < dx / 8; x++)
 					{
 						if (x < dy / 16 + 1)
-							TextOut(hdc, (Bigx * dx) + x * 8, ((Bigy + 1) * dy - 16), ystr, 1);//출력
+							TextOut(hdc, (Bigx * dx) + x * 8, ((Bigy + 1) * dy - 16), fstr, 1);//출력
 						else
 							TextOut(hdc, (Bigx * dx) + x * 8, ((Bigy + 1) * dy - 16), nstr, 2);//출력
 					}
