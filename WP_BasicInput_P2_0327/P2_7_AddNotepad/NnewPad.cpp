@@ -4,7 +4,7 @@
 
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
-#define MAXWORD 10
+#define MAXWORD 20
 #define MAXLINE 10
 
 HINSTANCE g_hInst;
@@ -97,7 +97,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				str[yPos / 20][i - 1] = str[yPos / 20][i];
 			}
 			str[yPos / 20][wordcount - 1] = '\0';
-			//str[yPos / 20][cword - 1] = ' ';
 			wordcount--;
 			cword--;
 		}
@@ -196,7 +195,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				cword = 0;
 				linecount++;
 				yPos = yPos + 20;
-				if (linecount % 10 == 0 && linecount >= 10)//10이면
+				if (yPos / 20 >= 10)//10이면
 				{//linecount가 10이 되면 엔터*2에서 linecount++를 빼고 커서 위치에서 덮어쓰기
 					yPos = 0;
 				}
@@ -385,7 +384,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
-		GetTextExtentPoint32(hdc, str[linecount % 10], cword, &size); //--- 문자열 길이 알아내기
+		
 		
 		if (password == 1)
 		{
@@ -457,7 +456,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						break;
 					TextOut(hdc, 0, i * 20, roundstr[i], lstrlen(roundstr[i]));//출력		
 				}
-				GetTextExtentPoint32(hdc, roundstr[linecount % 10], tempCword, &size);
+				GetTextExtentPoint32(hdc, roundstr[yPos / 20], tempCword, &size);
 				SetCaretPos(size.cx, yPos); //--- 캐럿 위치하기
 				EndPaint(hwnd, &ps);
 				break;
@@ -490,7 +489,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					TextOut(hdc, 0, i * 20, blankstr[i], lstrlen(blankstr[i]));//출력		
 				}
 
-				GetTextExtentPoint32(hdc, blankstr[linecount % 10], blankCword, &size);
+				GetTextExtentPoint32(hdc, blankstr[yPos / 20], blankCword, &size);
 				SetCaretPos(size.cx, yPos); //--- 캐럿 위치하기
 				EndPaint(hwnd, &ps);
 				break;
@@ -503,6 +502,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				TextOut(hdc, 0, i * 20, str[i], lstrlen(str[i]));//출력
 			}
 		}
+		GetTextExtentPoint32(hdc, str[yPos/20], cword, &size); //--- 문자열 길이 알아내기
 		SetCaretPos(size.cx, yPos); //--- 캐럿 위치하기
 		EndPaint(hwnd, &ps);
 		break;
