@@ -4,7 +4,7 @@
 
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
-#define MAXWORD 20
+#define MAXWORD 80
 #define MAXLINE 10
 
 HINSTANCE g_hInst;
@@ -463,7 +463,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 			if (blank == 1)
 			{
-				int blankCword = 0;
+				int blankCword = cword;
+				;
 				int bj = 0;
 				for (int i = 0; i <= linecount; i++)
 				{
@@ -471,17 +472,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					{
 						if (str[i][j] == ' ')
 						{
-
+							if (i == yPos / 20)
+								blankCword--;
 						}
 						else
 						{
 							blankstr[i][bj++] = str[i][j];
-							blankCword++;
+							
 						}
 					}
 					bj = 0;
+					
 				}
-
 				for (int i = 0; i <= linecount; i++)
 				{
 					if (i >= MAXLINE)
