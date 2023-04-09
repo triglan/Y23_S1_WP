@@ -482,12 +482,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						}
 					}
 					bj = 0;
-<<<<<<< HEAD
-			0
-				
-=======
-					
->>>>>>> 3394482678e7a3ef52614817728f33454574c276
 				}
 				for (int i = 0; i <= linecount; i++)
 				{
