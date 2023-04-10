@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <time.h>
 
+#include <random>
+
+std::random_device rd;
+std::uniform_int_distribution<> uid(0, 255);
+
 #define UP 20
 #define SIDE 20
 #define SIZE 40
@@ -416,16 +421,30 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		//색 충돌
 		{
+			//srand로 안바뀔 때가 잇어서 더 확실하게 바꿈
 			if (IntersectRect(&tempRect, &player1, &crect1))
-				a = rand() % 256, b = rand() % 256, c = rand() % 256;
+				a = uid(rd), b = uid(rd), c = uid(rd);
 			else if (IntersectRect(&tempRect, &player1, &crect2))
-				a = rand() % 256, b = rand() % 256, c = rand() % 256;
+				a = uid(rd), b = uid(rd), c = uid(rd);
 			else if (IntersectRect(&tempRect, &player1, &crect3))
-				a = rand() % 256, b = rand() % 256, c = rand() % 256;
+				a = uid(rd), b = uid(rd), c = uid(rd);
 			else if (IntersectRect(&tempRect, &player1, &crect4))
-				a = rand() % 256, b = rand() % 256, c = rand() % 256;
+				a = uid(rd), b = uid(rd), c = uid(rd);
 			else if (IntersectRect(&tempRect, &player1, &crect5))
-				a = rand() % 256, b = rand() % 256, c = rand() % 256;
+				a = uid(rd), b = uid(rd), c = uid(rd);
+
+			//if (IntersectRect(&tempRect, &player1, &crect1))
+			//	a = rand() % 256, b = rand() % 256, c = rand() % 256;
+			//else if (IntersectRect(&tempRect, &player1, &crect2))
+			//	a = rand() % 256, b = rand() % 256, c = rand() % 256;
+			//else if (IntersectRect(&tempRect, &player1, &crect3))
+			//	a = rand() % 256, b = rand() % 256, c = rand() % 256;
+			//else if (IntersectRect(&tempRect, &player1, &crect4))
+			//	a = rand() % 256, b = rand() % 256, c = rand() % 256;
+			//else if (IntersectRect(&tempRect, &player1, &crect5))
+			//	a = rand() % 256, b = rand() % 256, c = rand() % 256;
+
+			printf("%d, %d, %d\n", a, b, c);
 		}
 		//크기 충돌
 		{
