@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_BasicInput_P2_9_0405", "
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_BasicInput_P2_10_0409", "WP_BasicInput_P2_10_0409\WP_BasicInput_P2_10_0409.vcxproj", "{E64DC9C3-6945-4F04-B4C9-768EC24C5F05}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_BasicInput_P2_11_0410", "WP_BasicInput_P2_11_0410\WP_BasicInput_P2_11_0410.vcxproj", "{68E46E77-5B15-4635-B11D-26E1854ABB12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{E64DC9C3-6945-4F04-B4C9-768EC24C5F05}.Release|x64.Build.0 = Release|x64
 		{E64DC9C3-6945-4F04-B4C9-768EC24C5F05}.Release|x86.ActiveCfg = Release|Win32
 		{E64DC9C3-6945-4F04-B4C9-768EC24C5F05}.Release|x86.Build.0 = Release|Win32
+		{68E46E77-5B15-4635-B11D-26E1854ABB12}.Debug|x64.ActiveCfg = Debug|x64
+		{68E46E77-5B15-4635-B11D-26E1854ABB12}.Debug|x64.Build.0 = Debug|x64
+		{68E46E77-5B15-4635-B11D-26E1854ABB12}.Debug|x86.ActiveCfg = Debug|Win32
+		{68E46E77-5B15-4635-B11D-26E1854ABB12}.Debug|x86.Build.0 = Debug|Win32
+		{68E46E77-5B15-4635-B11D-26E1854ABB12}.Release|x64.ActiveCfg = Release|x64
+		{68E46E77-5B15-4635-B11D-26E1854ABB12}.Release|x64.Build.0 = Release|x64
+		{68E46E77-5B15-4635-B11D-26E1854ABB12}.Release|x86.ActiveCfg = Release|Win32
+		{68E46E77-5B15-4635-B11D-26E1854ABB12}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

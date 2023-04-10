@@ -260,6 +260,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_CHAR:
 	{
 		hdc = BeginPaint(hwnd, &ps);
+		if (wParam == 'q' || wParam == 'Q')
+		{
+			PostQuitMessage(0);
+		}
+		else if (wParam == 'r' || wParam == 'R')
+		{
+			x1 = 1, y1 = 1, p1size = 2;
+			x2 = 18, y2 = 18, p2size = 2;
+			a = 30, b = 30, c = 222;
+			a2 = 30, b2 = 222, c2 = 33;
+		}
 		if (p1turn)
 		{
 			if (wParam == 'w' || wParam == 'W')
@@ -351,14 +362,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					}
 				}
 			}
-			else if (wParam == 'q' || wParam == 'Q')
-			{
-				PostQuitMessage(0);
-			}
-			else if (wParam == 'r' || wParam == 'Q')
-			{
 
-			}
 			
 		}
 	}
