@@ -113,7 +113,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			hBrush = CreateSolidBrush(RGB(0, 150, 150));
 			SelectObject(hdc, hBrush);
 			Pie(hdc, 320, 400, 440, 520, 380, 400, 440, 460);
-
 		}
 
 		if (press)
