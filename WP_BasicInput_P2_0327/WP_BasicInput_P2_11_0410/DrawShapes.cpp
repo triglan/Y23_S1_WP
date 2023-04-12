@@ -186,6 +186,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 				SelectObject(hdc, hPen[select]);
 				SelectObject(hdc, hBrush[select]);
+
 				Rectangle(hdc, sp[select].x1, sp[select].y1, sp[select].x2, sp[select].y2);
 				break;
 			case '3':
@@ -362,6 +363,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			else
 			{
 				sp[shapeCount].ra = rand() % 256, sp[shapeCount].rb = rand() % 256, sp[shapeCount].rc = rand() % 256;
+				sp[shapeCount].a = rand() % 256, sp[shapeCount].b = rand() % 256, sp[shapeCount].c = rand() % 256;
 
 
 				shapeCount++;
@@ -376,6 +378,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		//print
 		{
 			printf("color : %d %d %d\n", sp[shapeCount - 1].a, sp[shapeCount - 1].b, sp[shapeCount - 1].c);
+			printf("Rcolor : %d %d %d\n", sp[shapeCount - 1].ra, sp[shapeCount - 1].rb, sp[shapeCount - 1].rc);
 			printf("x,y : %d %d %d %d\n", sp[shapeCount - 1].x1, sp[shapeCount - 1].x2, sp[shapeCount - 1].y1, sp[shapeCount - 1].y2);
 			printf("thick : %d\n", sp[shapeCount - 1].thick);
 			printf("select : %d\n", select);
@@ -444,9 +447,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 		}
 		if (wParam == 'c' || wParam == 'C')//내부 색 바꾸기
-			sp[select].a = uid(rd), sp[select].b = uid(rd), sp[select].c = uid(rd);
+			sp[select].a = rand()%256, sp[select].b = rand() % 256, sp[select].c = rand() % 256;
 		if(wParam == 'b'||wParam == 'B')//테두리 바꾸기
-			sp[select].a = uid(rd), sp[select].rb = uid(rd), sp[select].rc = uid(rd);
+			sp[select].ra = rand() % 256, sp[select].rb = rand() % 256, sp[select].rc = rand() % 256;
 		if (wParam == 'q')
 		{
 			PostQuitMessage(0);
