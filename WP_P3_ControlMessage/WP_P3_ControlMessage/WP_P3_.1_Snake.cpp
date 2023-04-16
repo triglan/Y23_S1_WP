@@ -412,7 +412,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			//오브젝트 움직임
 			for (int i = 0; i < objCount; i++)
 			{
-				if (obj[i].feed == false)
+				if (obj[i].feed == true)
 				{
 					if (obj[i].ai == 0)//우로 이동
 					{
@@ -636,6 +636,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			else
 				playerMove = true;
 		}
+		if (wParam == 'q' || wParam == 'Q')
+		{
+			PostQuitMessage(0);
+		}
 		if (wParam == '+')
 		{
 			if (wonSpeed > 100)
@@ -649,6 +653,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			SetTimer(hwnd, 1, wonSpeed, NULL);
 			SetTimer(hwnd, 2, wonSpeed, NULL);
 		}
+		
 		InvalidateRect(hwnd, NULL, TRUE);
 		break;
 	case WM_DESTROY:
