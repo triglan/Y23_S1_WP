@@ -2,7 +2,6 @@
 #include <tchar.h>
 #include <stdio.h>
 #include <time.h>
-
 #include <random>
 
 #define WINDOWSIZE 800
@@ -13,6 +12,14 @@ LPCTSTR lpszClass = L"Window Class Name";
 LPCTSTR lpszWindowName = L"windows program 1";
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
+
+struct mainCharacter {
+	int x;
+	int y;
+
+	int size;
+};
+
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevIsntace, LPSTR lpszCmdParam, int nCmdShow)
 {
@@ -54,7 +61,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static int space = 40;
 	static int boardsize = WINDOWSIZE / space;
 
+	static int wonCount = 0;
 
+	mainCharacter won[100];
+	RECT rect[100];
+	
 	switch (uMsg)
 	{
 	case WM_CREATE:
@@ -74,6 +85,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				MoveToEx(hdc, 0, y * boardsize, NULL);
 				LineTo(hdc, WINDOWSIZE, y * boardsize);
 			}
+		}
+
+		for (int i = 0; i < wonCount; i++)
+		{
+			int x = (2 * won[i].x + 1) * boardsize;
+			int y = (2 * won[i].y + 1) * boardsize;
+			Ellipse(hdc, x - won[i].size, y - won[i].size, x + won[i].size, y + won[i].size);
 		}
 
 		EndPaint(hWnd, &ps);
