@@ -40,32 +40,39 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevIsntace, LPSTR lpszCmdPar
 	return Message.wParam;
 }
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam
+)
 {
 	PAINTSTRUCT ps;
+	static int Timer1Count = 0, Timer2Count = 0;
+	static int wonSpeed = 200;
 	HDC hdc;
-	static SIZE size;
-	static TCHAR str[100] = { ' ' };
-	static int count;
-	switch (uMsg)
+	switch (iMsg) // 메시지 번호 
 	{
-	case WM_CREATE:
-		break;
-	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-
-
-		GetTextExtentPoint32(hdc, str, 1, &size);
-		wsprintf(str, L"dx : %d dy :  %d", size.cx, size.cy);
-		TextOut(hdc, 0, 0, str, lstrlen(str));
-
-
-		EndPaint(hWnd, &ps);
-		break;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	}
-
-	return DefWindowProc(hWnd, uMsg, wParam, lParam);
+		case WM_CREATE:
+			SetTimer(hwnd, 1, wonSpeed, NULL); //---1번 아이디를 가진 타이머: 0.06초 간격
+			SetTimer(hwnd, 2, 100, NULL); //---2번 아이디를 가진 타이머 : 0.1초 간격
+			break;
+			case WM_TIMER:
+					switch (wParam) {
+					case 1:
+						Timer1Count++;
+						break;
+					case 2:
+						Timer2Count++;
+						break;
+					}
+					InvalidateRect(hwnd, NULL, TRUE);
+					break;
+			case WM_PAINT:
+				hdc = BeginPaint(hwnd, &ps);
+				if (Timer1Count % 2 == 0)
+					TextOut(hdc, Timer1Count * 10, 0, L"Timer1 Count", 12);
+				//if (Timer2Count % 2 == 0)
+				//	TextOut(hdc, Timer2Count * 10, 100, L"Timer2 Count", 12);
+				EndPaint(hwnd, &ps);
+				break;
+}
+return DefWindowProc
+(hwnd, iMsg, wParam, lParam);
 }
