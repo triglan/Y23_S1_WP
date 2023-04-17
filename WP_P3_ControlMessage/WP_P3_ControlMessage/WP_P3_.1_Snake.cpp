@@ -5,7 +5,7 @@
 #include <random>
 
 #define WINDOWSIZE 800
-
+//TODO : Delete, oldBrush로 지워줘야 안터진다고 하심.
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 HINSTANCE g_hInst;
 LPCTSTR lpszClass = L"Window Class Name";
@@ -412,7 +412,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			//오브젝트 움직임
 			for (int i = 0; i < objCount; i++)
 			{
-				if (obj[i].feed == true)
+				if (obj[i].feed == false)
 				{
 					if (obj[i].ai == 0)//우로 이동
 					{
@@ -663,8 +663,4 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
-
-void CALLBACK TimerProc(HWND hwnd, UINT uMsg, UINT idEvent, DWORD dwTime) //1번 아이디 타이머 함수
-{
-	
-}
+
