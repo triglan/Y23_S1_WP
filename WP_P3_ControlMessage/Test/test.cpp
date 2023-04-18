@@ -1,4 +1,4 @@
-
+﻿
 #include <windows.h>
 #include <tchar.h>
 
@@ -40,39 +40,53 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevIsntace, LPSTR lpszCmdPar
 	return Message.wParam;
 }
 
-LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam
-)
+LRESULT CALLBACK WndProc(HWND hwnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
-	PAINTSTRUCT ps;
-	static int Timer1Count = 0, Timer2Count = 0;
-	static int wonSpeed = 200;
 	HDC hdc;
-	switch (iMsg) // �޽��� ��ȣ 
+	PAINTSTRUCT ps;
+	static int startX, startY, oldX, oldY;
+	static BOOL Drag;
+	int endX, endY;
+	switch (iMsg)
 	{
-		case WM_CREATE:
-			SetTimer(hwnd, 1, wonSpeed, NULL); //---1�� ���̵� ���� Ÿ�̸�: 0.06�� ����
-			SetTimer(hwnd, 2, 100, NULL); //---2�� ���̵� ���� Ÿ�̸� : 0.1�� ����
-			break;
-			case WM_TIMER:
-					switch (wParam) {
-					case 1:
-						Timer1Count++;
-						break;
-					case 2:
-						Timer2Count++;
-						break;
-					}
-					InvalidateRect(hwnd, NULL, TRUE);
-					break;
-			case WM_PAINT:
-				hdc = BeginPaint(hwnd, &ps);
-				if (Timer1Count % 2 == 0)
-					TextOut(hdc, Timer1Count * 10, 0, L"Timer1 Count", 12);
-				//if (Timer2Count % 2 == 0)
-				//	TextOut(hdc, Timer2Count * 10, 100, L"Timer2 Count", 12);
-				EndPaint(hwnd, &ps);
-				break;
-}
-return DefWindowProc
-(hwnd, iMsg, wParam, lParam);
+	case WM_CREATE:
+		startX = oldX = 0; //--- 시작 좌표
+		startY = oldY = 0;
+		Drag = FALSE;
+		return 0;
+	case WM_PAINT:
+		hdc = BeginPaint(hwnd, &ps);
+		MoveToEx(hdc, startX, startY, NULL); //--- 이동하고 선으로 연결
+		LineTo(hdc, oldX, oldY);
+		EndPaint(hwnd, &ps);
+		return 0;
+	case WM_LBUTTONDOWN: //--- 버튼을 누르면 드래그 동작 시작
+		Drag = TRUE;
+		break;
+	case WM_LBUTTONUP: //--- 버튼을 놓으면 드래그 종료
+		Drag = FALSE;
+		break;
+	case WM_MOUSEMOVE:
+		hdc = GetDC(hwnd);
+		if (Drag)
+		{ //--- 흰 바탕
+			SetROP2(hdc, R2_XORPEN); //--- 펜의 XOR 연산
+			SelectObject(hdc, (HPEN)GetStockObject(WHITE_PEN)); //--- 흰 펜
+			//--- 흰 바탕 XOR 흰 펜 = 검은색
+			//--- 검정 바탕 XOR 흰 펜 = 흰 색
+			endX = LOWORD(lParam);
+			endY = HIWORD(lParam);
+			MoveToEx(hdc, startX, startY, NULL);
+			LineTo(hdc, oldX, oldY); //--- 지우기 : 검정 바탕 XOR 흰 펜 = 흰 선
+			MoveToEx(hdc, startX, startY, NULL);
+			LineTo(hdc, endX, endY); //--- 그리기 : 흰 바탕 XOR 흰 펜 = 검은 선  화면의 결과 선
+			oldX = endX; oldY = endY; //--- 현 지점을 이전 지점으로 설정
+		}
+		ReleaseDC(hwnd, hdc);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
+	}
+	return (DefWindowProc(hwnd, iMsg, wParam, lParam));
 }
