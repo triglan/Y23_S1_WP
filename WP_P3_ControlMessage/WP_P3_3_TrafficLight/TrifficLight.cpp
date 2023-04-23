@@ -60,6 +60,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	HBRUSH hBrush, oldBrush;
 	HPEN hPen, oldPen;
 
+	HDC mdc;
+	HBITMAP hBitmap;
+	RECT rt;
 	static socar car[8];
 	static socar car2[8];
 
@@ -414,83 +417,103 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 		}
 		
-		InvalidateRect(hwnd, NULL, TRUE);
+		InvalidateRect(hwnd, NULL, FALSE);
 		break;
 	case WM_PAINT:
 		//기본 생성
+		GetClientRect(hwnd, &rt);
 		hdc = BeginPaint(hwnd, &ps);
+		mdc = CreateCompatibleDC(hdc); //--- 메모리 DC 만들기
+		hBitmap = CreateCompatibleBitmap(hdc, rt.right, rt.bottom); //--- 메모리 DC와 연결할 비트맵 만들기
+		SelectObject(mdc, (HBITMAP)hBitmap);
+
+		{
+			hBrush = CreateSolidBrush(RGB(255, 255, 255));
+			oldBrush = (HBRUSH)SelectObject(mdc, hBrush);
+			Rectangle(mdc, 0, 0, WINDOWSIZE, WINDOWSIZE);
+			SelectObject(mdc, oldBrush);
+			DeleteObject(hBrush);
+		}
 		//경계선
 		{
 			hPen = CreatePen(PS_DOT, 1, BLACK_PEN);
-			oldPen = (HPEN)SelectObject(hdc, hPen);
-			MoveToEx(hdc, 400, 400, NULL);
-			LineTo(hdc, 400, 600);
-			MoveToEx(hdc, 400, 400, NULL);
-			LineTo(hdc, 600, 400);
-			MoveToEx(hdc, 600, 400, NULL);
-			LineTo(hdc, 600, 600);
-			MoveToEx(hdc, 400, 600, NULL);
-			LineTo(hdc, 600, 600);
-			SelectObject(hdc, oldPen);
+			oldPen = (HPEN)SelectObject(mdc, hPen);
+			MoveToEx(mdc, 400, 400, NULL);
+			LineTo(mdc, 400, 600);
+			MoveToEx(mdc, 400, 400, NULL);
+			LineTo(mdc, 600, 400);
+			MoveToEx(mdc, 600, 400, NULL);
+			LineTo(mdc, 600, 600);
+			MoveToEx(mdc, 400, 600, NULL);
+			LineTo(mdc, 600, 600);
+			SelectObject(mdc, oldPen);
 			DeleteObject(hPen);
 
 			hPen = CreatePen(PS_SOLID, 3, BLACK_PEN);
-			SelectObject(hdc, hPen);
-			MoveToEx(hdc, 400, 0, NULL);
-			LineTo(hdc, 400, 400);
-			MoveToEx(hdc, 600, 0, NULL);
-			LineTo(hdc, 600, 400);
-			MoveToEx(hdc, 400, 600, NULL);
-			LineTo(hdc, 400, 1000);
-			MoveToEx(hdc, 600, 600, NULL);
-			LineTo(hdc, 600, 1000);
-			MoveToEx(hdc, 0, 400, NULL);
-			LineTo(hdc, 400, 400);
-			MoveToEx(hdc, 0, 600, NULL);
-			LineTo(hdc, 400, 600);
-			MoveToEx(hdc, 600, 400, NULL);
-			LineTo(hdc, 1000, 400);
-			MoveToEx(hdc, 600, 600, NULL);
-			LineTo(hdc, 1000, 600);
-			SelectObject(hdc, oldPen);
+			SelectObject(mdc, hPen);
+			MoveToEx(mdc, 400, 0, NULL);
+			LineTo(mdc, 400, 400);
+			MoveToEx(mdc, 600, 0, NULL);
+			LineTo(mdc, 600, 400);
+			MoveToEx(mdc, 400, 600, NULL);
+			LineTo(mdc, 400, 1000);
+			MoveToEx(mdc, 600, 600, NULL);
+			LineTo(mdc, 600, 1000);
+			MoveToEx(mdc, 0, 400, NULL);
+			LineTo(mdc, 400, 400);
+			MoveToEx(mdc, 0, 600, NULL);
+			LineTo(mdc, 400, 600);
+			MoveToEx(mdc, 600, 400, NULL);
+			LineTo(mdc, 1000, 400);
+			MoveToEx(mdc, 600, 600, NULL);
+			LineTo(mdc, 1000, 600);
+			SelectObject(mdc, oldPen);
 			DeleteObject(hPen);
 		}
 
 		//신호등
 		{
-			Rectangle(hdc, 650, 100, 950, 200);
+			Rectangle(mdc, 650, 100, 950, 200);
+
 			if(traffic == 0)
 				hBrush = CreateSolidBrush(RGB(255, 0, 0));
 			else
 				hBrush = CreateSolidBrush(RGB(50, 0, 0));
-			SelectObject(hdc, hBrush);
-			Ellipse(hdc, 665, 115, 735, 185);
+			oldBrush = (HBRUSH)SelectObject(mdc, hBrush);
+			Ellipse(mdc, 665, 115, 735, 185);
+			SelectObject(mdc, oldBrush);
+			DeleteObject(hBrush);
 
 			if (traffic == 1 || traffic == 3)
 				hBrush = CreateSolidBrush(RGB(255, 255, 0));
 			else
 				hBrush = CreateSolidBrush(RGB(50, 50, 0));
-			SelectObject(hdc, hBrush);
-			Ellipse(hdc, 765, 115, 835, 185);
-			
+			oldBrush = (HBRUSH)SelectObject(mdc, hBrush);
+			Ellipse(mdc, 765, 115, 835, 185);
+			SelectObject(mdc, oldBrush);
+			DeleteObject(hBrush);
+
 			if (traffic == 2)
 				hBrush = CreateSolidBrush(RGB(0, 0, 255));
 			else
 				hBrush = CreateSolidBrush(RGB(0, 0, 50));
-			SelectObject(hdc, hBrush);
-			Ellipse(hdc, 865, 115, 935, 185);
+			oldBrush = (HBRUSH)SelectObject(mdc, hBrush);
+			Ellipse(mdc, 865, 115, 935, 185);
+			SelectObject(mdc, oldBrush);
+			DeleteObject(hBrush);
 		}
 
 		//자동차
 		hBrush = CreateSolidBrush(RGB(30, 250, 250));
-		oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
+		oldBrush = (HBRUSH)SelectObject(mdc, hBrush);
 		for (int i = 0; i < 8; i++)
 		{
-			Rectangle(hdc, car[i].x - car[i].xsize, car[i].y - car[i].ysize, car[i].x + car[i].xsize, car[i].y + car[i].ysize);
-			Rectangle(hdc, car2[i].x - car2[i].xsize, car2[i].y - car2[i].ysize, car2[i].x + car2[i].xsize, car2[i].y + car2[i].ysize);
+			Rectangle(mdc, car[i].x - car[i].xsize, car[i].y - car[i].ysize, car[i].x + car[i].xsize, car[i].y + car[i].ysize);
+			Rectangle(mdc, car2[i].x - car2[i].xsize, car2[i].y - car2[i].ysize, car2[i].x + car2[i].xsize, car2[i].y + car2[i].ysize);
 		}
+		BitBlt(hdc, 0, 0, rt.right, rt.bottom, mdc, 0, 0, SRCCOPY);
 
-		SelectObject(hdc, oldBrush); // 이전의 펜으로 돌아감
+		SelectObject(mdc, oldBrush); // 이전의 펜으로 돌아감
 		DeleteObject(hBrush);
 		EndPaint(hwnd, &ps);
 		break;
@@ -511,7 +534,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			Speed -= 10;
 			SetTimer(hwnd, 1, Speed, NULL);
-			SetTimer(hwnd, 2, Speed, NULL);
+			//SetTimer(hwnd, 2, Speed, NULL);
 			SetTimer(hwnd, 3, Speed, NULL);
 			SetTimer(hwnd, 4, Speed, NULL);
 		}
@@ -519,7 +542,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			Speed += 10;
 			SetTimer(hwnd, 1, Speed, NULL);
-			SetTimer(hwnd, 2, Speed, NULL);
+			//SetTimer(hwnd, 2, Speed, NULL);
 			SetTimer(hwnd, 3, Speed, NULL);
 			SetTimer(hwnd, 4, Speed, NULL);
 		}

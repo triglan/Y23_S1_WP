@@ -77,11 +77,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static bool start = true;
 	static bool ballstart = false;
 	static bool brickdir = false;
-	
+	int brickc = 0;
+
 	static int Speed = 3;
 	static int Timer1Count = 0;
 	static int Timer2Count = 0;
 
+	TCHAR str[100];
 	switch (uMsg)
 	{
 	case WM_CREATE:
@@ -179,7 +181,20 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 		//기본 생성
 		hdc = BeginPaint(hwnd, &ps);
+
 		printf("x : %d y : %d Timer1Count : %d Speed : %d\n", ball.x, ball.y, Timer1Count, Speed);
+		for (int i = 0; i < 30; i++)
+		{
+			if (brick[i].life != 0)
+				brickc++;
+		}
+
+
+		wsprintf(str, L"블럭 개수 : %d", brickc);
+		if (start == false)
+		{
+			TextOut(hdc, 0, 0, str, lstrlen(str));
+		}
 
 		//충돌 이벤트
 		{
@@ -267,29 +282,31 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		//Paint
 		{
 			//SetROP2(hdc, R2_XORPEN);
-			hBrush = CreateSolidBrush(RGB(brick[0].a, brick[0].b, brick[0].c));
-			oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
+			//hBrush = CreateSolidBrush(RGB(brick[0].a, brick[0].b, brick[0].c));
+			//oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
 			for (int i = 0; i < brickCount; i++)
 			{
 				hBrush = CreateSolidBrush(RGB(brick[i].a, brick[i].b, brick[i].c));
-				SelectObject(hdc, hBrush);
+				oldBrush= (HBRUSH)SelectObject(hdc, hBrush);
 				Rectangle(hdc, brick[i].x - brick[i].xsize, brick[i].y - brick[i].ysize, brick[i].x + brick[i].xsize, brick[i].y + brick[i].ysize);
 				SelectObject(hdc, oldBrush); // 이전의 펜으로 돌아감
 				DeleteObject(hBrush);
 			}
 
 			hBrush = CreateSolidBrush(RGB(player.a, player.b, player.c));
-			SelectObject(hdc, hBrush);
+			oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
 			Rectangle(hdc, player.x - player.xsize, player.y - player.ysize, player.x + player.xsize, player.y + player.ysize);
+			SelectObject(hdc, oldBrush); // 이전의 펜으로 돌아감
 			DeleteObject(hBrush);
 
 			hBrush = CreateSolidBrush(RGB(ball.a, ball.b, ball.c));
-			SelectObject(hdc, hBrush);
+			oldBrush = (HBRUSH)SelectObject(hdc, hBrush);
 			Ellipse(hdc, ball.x - ball.xsize, ball.y - ball.ysize, ball.x + ball.xsize, ball.y + ball.ysize);
+			SelectObject(hdc, oldBrush); // 이전의 펜으로 돌아감
+			DeleteObject(hBrush);
 		}
 		
-		SelectObject(hdc, oldBrush); // 이전의 펜으로 돌아감
-		DeleteObject(hBrush);
+
 		EndPaint(hwnd, &ps);
 		break;
 	case WM_MOUSEMOVE:
