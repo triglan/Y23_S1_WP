@@ -179,7 +179,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				car2[7].x = 1050;
 			}
 		}
-
 		//시작점 지났는지 검사
 		{
 			if (car2[0].y == car[0].ysize)
@@ -231,7 +230,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				car[7].x = 950;
 			}
 		}
-
 		//자동차 AI
 		{
 			if (Timer1Count % 1 == 0)

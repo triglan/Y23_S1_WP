@@ -52,21 +52,20 @@ END
 
 IDR_MENU1 MENU
 BEGIN
-    MENUITEM SEPARATOR
-    MENUITEM "Gamestart",                   ID_Gamestart
+    MENUITEM "Start",                       ID_Start
     MENUITEM "Reset",                       ID_Reset
-    MENUITEM "End",                         ID_End
-    MENUITEM "Fast",                        ID_Fast
-    MENUITEM "Medium",                      ID_Medium
-    MENUITEM "Slow",                        ID_Slow
-    MENUITEM "Cyan",                        ID_Cyan
-    MENUITEM "Magenta",                     ID_Magenta
-    MENUITEM "Yellow",                      40009
-    MENUITEM "Circle",                      40010
-    MENUITEM "Rect",                        40011
-    MENUITEM "20",                          40012
-    MENUITEM "25",                          40013
-    MENUITEM "30",                          40014
+    MENUITEM "End",                         40005
+    MENUITEM "Fast",                        40006
+    MENUITEM "Medium",                      40007
+    MENUITEM "Slow",                        40008
+    MENUITEM "Cyan",                        40009
+    MENUITEM "Magenta",                     40010
+    MENUITEM "Yellow",                      40011
+    MENUITEM "Small",                       ID_Small
+    MENUITEM "Big",                         40014
+    MENUITEM "3",                           40015
+    MENUITEM "4",                           40016
+    MENUITEM "5",                           40017
 END
 
 #endif    // 한국어(대한민국) resources

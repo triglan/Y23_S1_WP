@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{e14997a4-0587-42d4-8607-a3dccc50fb96}</ProjectGuid>
-    <RootNamespace>WPP1ResourceMenu</RootNamespace>
+    <ProjectGuid>{de922f80-8642-4afe-9153-2f0ad5a02247}</ProjectGuid>
+    <RootNamespace>WPP41BreakBrickMenu</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="소스.cpp" />
+    <ClCompile Include="brick.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />

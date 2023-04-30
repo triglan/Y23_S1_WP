@@ -15,6 +15,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Snake.cpp" />
+    <ClCompile Include="Paint.cpp" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
 </Project>
