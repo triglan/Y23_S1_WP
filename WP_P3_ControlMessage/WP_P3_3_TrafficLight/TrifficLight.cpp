@@ -125,7 +125,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			break;
 		case 2:
 			if(!stop)
-				Timer2Count++;
+				Timer2Count++;//
 			break;
 		default:
 			break;
@@ -233,9 +233,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			if (Timer1Count % 1 == 0)
 			{
-				car[0].y++;
+				car[0].y++;//위로 이동 
 				car[1].y++;
-				if (traffic == 0 || traffic == 3)
+				if (traffic == 0 || traffic == 3)//신호등에 걸리면
 				{
 					if (car[1].y == 325)
 					{
@@ -259,7 +259,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						}
 					}
 				}
-				if (car0pass)
+				if (car0pass)//끝자락 지났으면 세컨드 차 보냄
 				{
 					car2[0].y++;
 				}
