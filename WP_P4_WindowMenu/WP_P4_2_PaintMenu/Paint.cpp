@@ -98,6 +98,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		hBitmap = CreateCompatibleBitmap(hdc, rt.right, rt.bottom); //--- 메모리 DC와 연결할 비트맵 만들기
 		SelectObject(mdc, (HBITMAP)hBitmap);
 
+		printf("paint select : %d\n", select);
 		//바탕색
 		{
 			hbr = CreateSolidBrush(RGB(255, 255, 255));
@@ -139,6 +140,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 			else {
 				hp = CreatePen(PS_SOLID, 0, RGB(0, 0, 0));
+				oldp = (HPEN)SelectObject(mdc, hp);
+			}
+			if (i == select) {
+				SelectObject(mdc, oldp); // 이전의 펜으로 돌아감
+				DeleteObject(hp);
+				hp = CreatePen(PS_SOLID, 2, RGB(255, 100, 0));
 				oldp = (HPEN)SelectObject(mdc, hp);
 			}
 			Rectangle(mdc, r[i].sx / size * size, r[i].sy / size * size, r[i].ex / size * size, r[i].ey / size * size);
@@ -198,6 +205,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_CHAR:
 	{
+		printf("select : %d\n", select);
 		if (wParam == '1') {
 			select = 0;
 		}
