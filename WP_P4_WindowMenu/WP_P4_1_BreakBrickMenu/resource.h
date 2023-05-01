@@ -20,13 +20,23 @@
 #define ID_3                            40015
 #define ID_4                            40016
 #define ID_5                            40017
+#define ID_GAME_START                   40018
+#define ID_GAME_RESET                   40019
+#define ID_GAME_END                     40020
+#define ID_START                        40021
+#define ID_RESET                        40022
+#define ID_END                          40023
+#define ID_Reset                        40024
+#define ID_End                          40025
+#define ID_Menu                         40026
+#define ID_Start                        40027
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        102
-#define _APS_NEXT_COMMAND_VALUE         40018
+#define _APS_NEXT_COMMAND_VALUE         40028
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

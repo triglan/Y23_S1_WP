@@ -158,10 +158,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			for (int j = 0; j < rcount; j++){
 				rt1 = { r[i].sx, r[i].sy, r[i].ex, r[i].ey };
 				rt2 = { r[j].sx, r[j].sy, r[j].ex, r[j].ey };
-				if (IntersectRect(&colrt[colcount], &rt1, &rt2) && i != j) {
+				if (IntersectRect(&colrt[0], &rt1, &rt2) && i != j) {
 					hbr = CreateSolidBrush(RGB((r[i].r + r[j].r) / 2 , (r[i].g + r[j].g) / 2 , (r[i].b + r[j].b) / 2));
 					oldbr = (HBRUSH)SelectObject(mdc, hbr);
-					FillRect(mdc, &colrt[colcount], hbr);
+					FillRect(mdc, &colrt[0], hbr);
 				}
 			}
 		}

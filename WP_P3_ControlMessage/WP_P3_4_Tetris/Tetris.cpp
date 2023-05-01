@@ -74,7 +74,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static int board[12][6];
 	//타이머
 	static int Timer1Count = 0;
-	static int wonSpeed = 100;
+	static int wonSpeed = 200;
 	
 	//기본 크기
 	static int xspace = 6;

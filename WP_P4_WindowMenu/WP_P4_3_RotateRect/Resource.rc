@@ -50,27 +50,22 @@ END
 // Menu
 //
 
-IDR_MENU1 MENU
+IDR_MENU2 MENU
 BEGIN
+    MENUITEM "Move",                        ID_MOVE
+    POPUP "Change"
+    BEGIN
+        MENUITEM "Change",                      ID_CHANGE_CHANGE
+        MENUITEM "Red",                         ID_CHANGE_RED
+        MENUITEM "Green",                       ID_CHANGE_GREEN
+        MENUITEM "Blue",                        ID_CHANGE_BLUE
+        MENUITEM "Random",                      ID_CHANGE_RANDOM
+    END
     POPUP "Game"
     BEGIN
-        MENUITEM "Start",                       ID_Start
-        MENUITEM "Reset",                       ID_Reset
-        MENUITEM "End",                         ID_End
+        MENUITEM "Reset",                       ID_GAME_RESET
+        MENUITEM "Quit",                        ID_GAME_QUIT
     END
-    MENUITEM "Reset",                       ID_Reset
-    MENUITEM "End",                         40005
-    MENUITEM "Fast",                        40006
-    MENUITEM "Medium",                      40007
-    MENUITEM "Slow",                        40008
-    MENUITEM "Cyan",                        40009
-    MENUITEM "Magenta",                     40010
-    MENUITEM "Yellow",                      40011
-    MENUITEM "Small",                       ID_Small
-    MENUITEM "Big",                         40014
-    MENUITEM "3",                           40015
-    MENUITEM "4",                           40016
-    MENUITEM "5",                           40017
 END
 
 #endif    // 한국어(대한민국) resources
