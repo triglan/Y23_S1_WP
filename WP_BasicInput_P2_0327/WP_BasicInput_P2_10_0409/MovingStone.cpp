@@ -433,17 +433,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			else if (IntersectRect(&tempRect, &player1, &crect5))
 				a = uid(rd), b = uid(rd), c = uid(rd);
 
-			//if (IntersectRect(&tempRect, &player1, &crect1))
-			//	a = rand() % 256, b = rand() % 256, c = rand() % 256;
-			//else if (IntersectRect(&tempRect, &player1, &crect2))
-			//	a = rand() % 256, b = rand() % 256, c = rand() % 256;
-			//else if (IntersectRect(&tempRect, &player1, &crect3))
-			//	a = rand() % 256, b = rand() % 256, c = rand() % 256;
-			//else if (IntersectRect(&tempRect, &player1, &crect4))
-			//	a = rand() % 256, b = rand() % 256, c = rand() % 256;
-			//else if (IntersectRect(&tempRect, &player1, &crect5))
-			//	a = rand() % 256, b = rand() % 256, c = rand() % 256;
-
 			printf("%d, %d, %d\n", a, b, c);
 		}
 		//크기 충돌

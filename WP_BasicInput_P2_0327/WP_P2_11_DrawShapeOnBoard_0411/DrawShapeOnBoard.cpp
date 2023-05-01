@@ -106,7 +106,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		for (int i = 0; i < shapeCount; i++)
 		{
 			SelectObject(hdc, oldPen);
-
+			//삼각형 그리기
 			POINT TriPoint[10] = { {(2 * sp[i].x * boardsize + boardsize) / 2, (2 * sp[i].y * boardsize + boardsize) / 2 - (sp[i].size * boardsize / 8)},
 				{(2 * sp[i].x * boardsize + boardsize) / 2 - (sp[i].size * boardsize / 8), (2 * sp[i].y * boardsize + boardsize) / 2 + (sp[i].size * boardsize / 8) },
 				{(2 * sp[i].x * boardsize + boardsize) / 2 + (sp[i].size * boardsize / 8), (2 * sp[i].y * boardsize + boardsize) / 2 + (sp[i].size * boardsize / 8)} };
@@ -117,18 +117,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 			switch (sp[i].order)
 			{
-			case 'r':
+			case 'r'://사각형
 				hBrush[i] = CreateSolidBrush(RGB(sp[i].a, sp[i].b, sp[i].c));
 				SelectObject(hdc, hBrush[i]);
 				Rectangle(hdc, (2 * sp[i].x * boardsize + boardsize) / 2 - (sp[i].size * boardsize / 8), (2 * sp[i].y * boardsize + boardsize) / 2 - (sp[i].size * boardsize / 8),
 					(2 * sp[i].x * boardsize + boardsize) / 2 + (sp[i].size * boardsize / 8), (2 * sp[i].y * boardsize + boardsize) / 2 + (sp[i].size * boardsize / 8));
 				break;
-			case 't':
+			case 't'://삼각형
 				hBrush[i] = CreateSolidBrush(RGB(sp[i].a, sp[i].b, sp[i].c));
 				SelectObject(hdc, hBrush[i]);
 				Polygon(hdc, TriPoint, 3);
 				break;
-			case 'e':
+			case 'e'://원
 				hBrush[i] = CreateSolidBrush(RGB(sp[i].a, sp[i].b, sp[i].c));
 				SelectObject(hdc, hBrush[i]);
 				Ellipse(hdc, (2 * sp[i].x * boardsize + boardsize) / 2 - (sp[i].size * boardsize / 8), (2 * sp[i].y * boardsize + boardsize) / 2 - (sp[i].size * boardsize / 8),
@@ -145,7 +145,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		EndPaint(hwnd, &ps);
 		break;
 	case WM_KEYDOWN:
-		if (wParam == VK_LEFT)
+		if (wParam == VK_LEFT)//선택된 도형 왼쪽으로 이동
 		{
 			if (sp[select].x > 0)
 				sp[select].x--;
@@ -211,7 +211,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		//도형 생성
 		if (wParam == 'r' || wParam == 'R')
 		{
-			if (shapeCount > 9)//10개가 넘으면
+			if (shapeCount > 9)//10개가 넘으면 땡기고 새로 그려
 			{
 				for (int i = 0; i < shapeCount; i++)
 				{
@@ -223,9 +223,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			int randx;
 			int randy;
 			bool over = false;
-			while (true)
-			{
-				//std::uniform_int_distribution<> uid(0, space);
+			while (true)//랜덤한 x,y에 그려라 중복자리면 그리면 다시 돌리고 
+			{//아니면 탈출해서그려
 				over = false;
 				randx = rand()%space;
 				randy = rand()%space;
@@ -245,14 +244,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					break;
 			}
 			printf("\n\n");
-			sp[shapeCount].order = 'r';
+			sp[shapeCount].order = 'r';//사각형을 x,y에 a,b,c RGB로 사이즈 2크기로 그려라
 			sp[shapeCount].x = randx;
 			sp[shapeCount].y = randy;
 			sp[shapeCount].a = rand()%256, sp[shapeCount].b = rand()%256, sp[shapeCount].c = rand()%256;
 			sp[shapeCount++].size = 2;
 			if (select == shapeCount - 1)
 				select = shapeCount;
-
 		}
 		if (wParam == 't' || wParam == 'T')
 		{

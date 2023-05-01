@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P3_2_BreakBrick", "WP_P3
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P3_3_TrafficLight", "WP_P3_3_TrafficLight\WP_P3_3_TrafficLight.vcxproj", "{61D71A79-4D88-46BD-B90F-56F05D6FC7C2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P3_4_Tetris", "WP_P3_4_Tetris\WP_P3_4_Tetris.vcxproj", "{AB2E7B8B-0B90-4D0D-9079-9D774EF8C0C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{61D71A79-4D88-46BD-B90F-56F05D6FC7C2}.Release|x64.Build.0 = Release|x64
 		{61D71A79-4D88-46BD-B90F-56F05D6FC7C2}.Release|x86.ActiveCfg = Release|Win32
 		{61D71A79-4D88-46BD-B90F-56F05D6FC7C2}.Release|x86.Build.0 = Release|Win32
+		{AB2E7B8B-0B90-4D0D-9079-9D774EF8C0C4}.Debug|x64.ActiveCfg = Debug|x64
+		{AB2E7B8B-0B90-4D0D-9079-9D774EF8C0C4}.Debug|x64.Build.0 = Debug|x64
+		{AB2E7B8B-0B90-4D0D-9079-9D774EF8C0C4}.Debug|x86.ActiveCfg = Debug|Win32
+		{AB2E7B8B-0B90-4D0D-9079-9D774EF8C0C4}.Debug|x86.Build.0 = Debug|Win32
+		{AB2E7B8B-0B90-4D0D-9079-9D774EF8C0C4}.Release|x64.ActiveCfg = Release|x64
+		{AB2E7B8B-0B90-4D0D-9079-9D774EF8C0C4}.Release|x64.Build.0 = Release|x64
+		{AB2E7B8B-0B90-4D0D-9079-9D774EF8C0C4}.Release|x86.ActiveCfg = Release|Win32
+		{AB2E7B8B-0B90-4D0D-9079-9D774EF8C0C4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -131,18 +131,18 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
 		hBrush = CreateSolidBrush(RGB(100, 100, 100));
-		for (int i = 0; i < objCount; i++)
+		for (int i = 0; i < objCount; i++)//충돌 이벤트
 		{
-			if (obj[i].x == won[0].x && obj[i].y == won[0].y && obj[i].feed == false)//머리와 충돌 시
-			{
+			if (obj[i].x == won[0].x && obj[i].y == won[0].y && obj[i].feed == false)
+			{//머리와 충돌 시
 				obj[i].feed = true;
-				obj[i].x += 1;//부딪치자마자 바로 꼬리원이 되버리니까;
+				obj[i].x += 1;//부딪치자마자 바로 꼬리원이 되버리니까 한칸 옆으로 도망가게 해줌
 			}
-			else if (obj[i].x == won[0].x && obj[i].y == won[0].y && obj[i].feed == true)//먹이가 머리랑 충돌 시
-			{
+			else if (obj[i].x == won[0].x && obj[i].y == won[0].y && obj[i].feed == true)
+			{//먹이가 머리랑 충돌 시 꼬리 뒤로 붙어
 				obj[i].feed = false;
-				won[wonCount++] = obj[i];
-				for (int j = i; j < objCount; j++)
+				won[wonCount++] = obj[i];//꼬리 뒤로 가
+				for (int j = i; j < objCount; j++)//오브젝트 하나 제거
 				{
 					obj[j] = obj[j + 1];
 				}
@@ -152,7 +152,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 
 		for (int objc = 0; objc < objCount; objc++)
-		{
+		{//주인공 꼬리랑 먹이랑 충돌 시 꼬리를 떼어 버려
 			for (int wonc = 1; wonc < wonCount; wonc++)
 			{
 				if (won[wonc].x == obj[objc].x && won[wonc].y == obj[objc].y && obj[objc].feed == true)
@@ -172,7 +172,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 
 		if (wonclicked == true && Timer2Count % 3 == 0)
-		{
+		{//클릭하면 잠깐 커져라
 			wonclicked = false;
 			won[0].size = 5;
 			mx = 0;
@@ -182,7 +182,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (Timer1Count % 2 == 0)
 		{
 			
-			if (playerMove == true)
+			if (playerMove == true)//이동 가능하면
 			{
 				for (int i = wonCount - 2; i >= 0; i--)//꼬리 좌표 먼저 옮기고 그다음에 머리 좌표 이동
 				{
@@ -199,7 +199,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						won[0].y++;
 					else if (won[0].y > my / boardsize)
 						won[0].y--;
-					if (won[0].x == mx / 20 && won[0].y == my / 20)
+					if (won[0].x == mx / 20 && won[0].y == my / 20)//도착했으면
 					{
 						clicked = false;
 						wonleft = false;
@@ -216,7 +216,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					{
 						won[0].x = 0;
 					}
-					else if (jump2 == true)
+					else if (jump2 == true)//점푸 후 착지
 					{
 						won[0].x++;
 						won[0].y++;
@@ -228,19 +228,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						won[0].y--;
 						jump = false;
 						jump2 = true;
-					}
-					else if (clicked == true)
-					{
-						if (won[0].x > mx / boardsize)
-							won[0].x--;
-						else if (won[0].x < mx / boardsize)
-							won[0].x++;
-						else if (won[0].y < my / boardsize)
-							won[0].y++;
-						else if (won[0].y > my / boardsize)
-							won[0].y--;
-						else if (won[0].x == mx / 20 && won[0].y == my / 20)
-							clicked == false;
 					}
 					else
 						won[0].x++;
@@ -510,12 +497,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			int y = ((2 * obj[i].y + 1) * boardsize) / 2;
 			hBrush = CreateSolidBrush(RGB(obj[i].a, obj[i].b, obj[i].c));
 			SelectObject(hdc, hBrush);
-			//if (won[i].shape == 0)
 			Ellipse(hdc, x - obj[i].size, y - obj[i].size, x + obj[i].size, y + obj[i].size);
-			//else if (obj[i].shape == 1)
-			//	Rectangle(hdc, x - obj[i].size, y - obj[i].size, x + obj[i].size, y + obj[i].size);
-			//else if (obj[i].shape == 2)
-			//	Pie(hdc, x - obj[i].size, y - obj[i].size, x + obj[i].size, y + obj[i].size, x + obj[i].size, y - obj[i].size, x + obj[i].size, y + obj[i].size);
 		}
 
 		//주인공 x,y
@@ -525,18 +507,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			int y = ((2 * won[i].y + 1) * boardsize) / 2;
 			hBrush = CreateSolidBrush(RGB(won[i].a, won[i].b, won[i].c));
 			SelectObject(hdc, hBrush);
-			/*if (won[i].shape == 0)*/
 			Ellipse(hdc, x - won[i].size, y - won[i].size, x + won[i].size, y + won[i].size);
-			//else if (won[i].shape == 1)
-			//	Rectangle(hdc, x - won[i].size, y - won[i].size, x + won[i].size, y + won[i].size);
-			//else if (won[i].shape == 2)
-			//	Pie(hdc, x - won[i].size, y - won[i].size, x + won[i].size, y + won[i].size, x + won[i].size, y - won[i].size, x + won[i].size, y + won[i].size);
 		}
 
 		EndPaint(hwnd, &ps);
 		break;
 
-	case WM_RBUTTONDOWN:
+	case WM_RBUTTONDOWN://장애물 설치
 		if (obsCount >= 19)
 		{
 			InvalidateRect(hwnd, NULL, TRUE);
@@ -544,7 +521,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		mx = LOWORD(lParam);
 		my = HIWORD(lParam);
-		for (int i = 0; i < wonCount; i++)
+		for (int i = 0; i < wonCount; i++)//주인공이랑 중복이면 탈출
 		{
 			if (mx / boardsize == won[i].x && my / boardsize == won[i].y)
 			{
@@ -552,7 +529,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				break;
 			}
 		}
-		for (int i = 0; i < objCount; i++)
+		for (int i = 0; i < objCount; i++)//오브젝트랑 중복이면 탈출
 		{
 			if (mx / boardsize == obj[i].x && my / boardsize == my / boardsize == obj[i].y)
 			{
@@ -569,7 +546,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_LBUTTONDOWN:
 		mx = LOWORD(lParam);
 		my = HIWORD(lParam);
-		if (mx / boardsize == won[0].x && my / boardsize == won[0].y)
+		if (mx / boardsize == won[0].x && my / boardsize == won[0].y)//좌클릭 방향으로 이동
 		{
 			won[0].size = 10;
 			wonclicked = true;
@@ -618,11 +595,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_CHAR:
 		if(wParam == 'j' || wParam == 'J')
-		{
-			jump = true;
-		}
+			jump = true;//점프
 		if (wParam == 't' || wParam == 'T')
-		{
+		{//주인공원이 맨 뒤로 감
 			won[wonCount] = won[0];
 			for (int i = 0; i < wonCount; i++)
 			{
@@ -630,7 +605,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 		}
 		if (wParam == 's' || wParam == 'S')
-		{
+		{//움직임 시작
 			if (playerMove == true)
 				playerMove = false;
 			else

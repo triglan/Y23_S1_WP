@@ -1,11 +1,11 @@
-// Microsoft Visual C++에서 생성한 리소스 스크립트입니다.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
 //
-// TEXTINCLUDE 2 리소스에서 생성되었습니다.
+// Generated from the TEXTINCLUDE 2 resource.
 //
 #include "winres.h"
 
@@ -13,10 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 한국어(대한민국) 리소스
+// 한국어(대한민국) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
-LANGUAGE 18, 1
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -24,18 +25,18 @@ LANGUAGE 18, 1
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE  
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE  
+2 TEXTINCLUDE 
 BEGIN
     "#include ""winres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE  
+3 TEXTINCLUDE 
 BEGIN
     "\r\n"
     "\0"
@@ -43,7 +44,32 @@ END
 
 #endif    // APSTUDIO_INVOKED
 
-#endif    // 한국어(대한민국) 리소스
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU
+BEGIN
+    MENUITEM SEPARATOR
+    MENUITEM "Gamestart",                   ID_Gamestart
+    MENUITEM "Reset",                       ID_Reset
+    MENUITEM "End",                         ID_End
+    MENUITEM "Fast",                        ID_Fast
+    MENUITEM "Medium",                      ID_Medium
+    MENUITEM "Slow",                        ID_Slow
+    MENUITEM "Cyan",                        ID_Cyan
+    MENUITEM "Magenta",                     ID_Magenta
+    MENUITEM "Yellow",                      40009
+    MENUITEM "Circle",                      40010
+    MENUITEM "Rect",                        40011
+    MENUITEM "20",                          40012
+    MENUITEM "25",                          40013
+    MENUITEM "30",                          40014
+END
+
+#endif    // 한국어(대한민국) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -51,9 +77,10 @@ END
 #ifndef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
 //
-// TEXTINCLUDE 3 리소스에서 생성되었습니다.
+// Generated from the TEXTINCLUDE 3 resource.
 //
 
 
 /////////////////////////////////////////////////////////////////////////////
-#endif    // APSTUDIO_INVOKED가 아님
+#endif    // not APSTUDIO_INVOKED
+

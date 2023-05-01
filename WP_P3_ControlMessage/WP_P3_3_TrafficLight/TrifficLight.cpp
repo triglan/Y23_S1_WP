@@ -128,7 +128,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			break;
 		case 2:
 			if(!stop)
-				Timer2Count++;
+				Timer2Count++;//
 			break;
 		default:
 			break;
@@ -179,7 +179,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				car2[7].x = 1050;
 			}
 		}
-
 		//시작점 지났는지 검사
 		{
 			if (car2[0].y == car[0].ysize)
@@ -231,14 +230,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				car[7].x = 950;
 			}
 		}
-
 		//자동차 AI
 		{
 			if (Timer1Count % 1 == 0)
 			{
-				car[0].y++;
+				car[0].y++;//위로 이동 
 				car[1].y++;
-				if (traffic == 0 || traffic == 3)
+				if (traffic == 0 || traffic == 3)//신호등에 걸리면
 				{
 					if (car[1].y == 325)
 					{
@@ -262,7 +260,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 						}
 					}
 				}
-				if (car0pass)
+				if (car0pass)//끝자락 지났으면 세컨드 차 보냄
 				{
 					car2[0].y++;
 				}
@@ -511,8 +509,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			Rectangle(mdc, car[i].x - car[i].xsize, car[i].y - car[i].ysize, car[i].x + car[i].xsize, car[i].y + car[i].ysize);
 			Rectangle(mdc, car2[i].x - car2[i].xsize, car2[i].y - car2[i].ysize, car2[i].x + car2[i].xsize, car2[i].y + car2[i].ysize);
 		}
+<<<<<<< HEAD
 		BitBlt(hdc, 0, 0, rt.right, rt.bottom, mdc, 0, 0, SRCCOPY);//++++
+=======
+>>>>>>> e59647a6ee2f2242496b1addf4a338fbf9d8df00
 
+		BitBlt(hdc, 0, 0, rt.right, rt.bottom, mdc, 0, 0, SRCCOPY);
 		SelectObject(mdc, oldBrush); // 이전의 펜으로 돌아감
 		DeleteObject(hBrush);
 		EndPaint(hwnd, &ps);
