@@ -423,11 +423,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		//기본 생성
 		GetClientRect(hwnd, &rt);
 		hdc = BeginPaint(hwnd, &ps);
-		mdc = CreateCompatibleDC(hdc); //--- 메모리 DC 만들기
-		hBitmap = CreateCompatibleBitmap(hdc, rt.right, rt.bottom); //--- 메모리 DC와 연결할 비트맵 만들기
-		SelectObject(mdc, (HBITMAP)hBitmap);
+		mdc = CreateCompatibleDC(hdc); //--- 메모리 DC 만들기+++전부 mdc 써야함
+		hBitmap = CreateCompatibleBitmap(hdc, rt.right, rt.bottom); //--- 메모리 DC와 연결할 비트맵 만들기+++
+		SelectObject(mdc, (HBITMAP)hBitmap);//+++
 
-		{
+		{//흰색 배경 칠하기
 			hBrush = CreateSolidBrush(RGB(255, 255, 255));
 			oldBrush = (HBRUSH)SelectObject(mdc, hBrush);
 			Rectangle(mdc, 0, 0, WINDOWSIZE, WINDOWSIZE);
@@ -511,7 +511,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			Rectangle(mdc, car[i].x - car[i].xsize, car[i].y - car[i].ysize, car[i].x + car[i].xsize, car[i].y + car[i].ysize);
 			Rectangle(mdc, car2[i].x - car2[i].xsize, car2[i].y - car2[i].ysize, car2[i].x + car2[i].xsize, car2[i].y + car2[i].ysize);
 		}
-		BitBlt(hdc, 0, 0, rt.right, rt.bottom, mdc, 0, 0, SRCCOPY);
+		BitBlt(hdc, 0, 0, rt.right, rt.bottom, mdc, 0, 0, SRCCOPY);//++++
 
 		SelectObject(mdc, oldBrush); // 이전의 펜으로 돌아감
 		DeleteObject(hBrush);
