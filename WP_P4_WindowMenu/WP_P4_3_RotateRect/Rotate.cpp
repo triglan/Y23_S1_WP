@@ -59,7 +59,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	HDC mdc;
 	HBITMAP hBitmap;
-	RECT rt;
+	RECT rt;	
 
 	HPEN hp = 0, oldp = 0;
 
