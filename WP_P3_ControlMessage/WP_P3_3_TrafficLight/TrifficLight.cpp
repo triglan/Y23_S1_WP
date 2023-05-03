@@ -509,14 +509,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			Rectangle(mdc, car[i].x - car[i].xsize, car[i].y - car[i].ysize, car[i].x + car[i].xsize, car[i].y + car[i].ysize);
 			Rectangle(mdc, car2[i].x - car2[i].xsize, car2[i].y - car2[i].ysize, car2[i].x + car2[i].xsize, car2[i].y + car2[i].ysize);
 		}
-<<<<<<< HEAD
-		BitBlt(hdc, 0, 0, rt.right, rt.bottom, mdc, 0, 0, SRCCOPY);//++++
-=======
->>>>>>> e59647a6ee2f2242496b1addf4a338fbf9d8df00
-
-		BitBlt(hdc, 0, 0, rt.right, rt.bottom, mdc, 0, 0, SRCCOPY);
 		SelectObject(mdc, oldBrush); // 이전의 펜으로 돌아감
 		DeleteObject(hBrush);
+
+		BitBlt(hdc, 0, 0, rt.right, rt.bottom, mdc, 0, 0, SRCCOPY);
 		EndPaint(hwnd, &ps);
 		break;
 

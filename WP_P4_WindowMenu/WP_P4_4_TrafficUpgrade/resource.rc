@@ -50,27 +50,32 @@ END
 // Menu
 //
 
-IDR_MENU2 MENU
+IDR_MENU1 MENU
 BEGIN
-    POPUP "Move"
+    POPUP "게임"
     BEGIN
-        MENUITEM "1",                           ID_MOVE_1
-        MENUITEM "2",                           ID_MOVE_2
-        MENUITEM "3",                           ID_MOVE_3
+        MENUITEM "Start",                       ID_40001
+        MENUITEM "End",                         ID_40002
     END
-    POPUP "Change"
+    POPUP "속도"
     BEGIN
-        MENUITEM "Change",                      ID_CHANGE_CHANGE
-        MENUITEM "Red",                         ID_CHANGE_RED
-        MENUITEM "Green",                       ID_CHANGE_GREEN
-        MENUITEM "Blue",                        ID_CHANGE_BLUE
-        MENUITEM "Random",                      ID_CHANGE_RANDOM
+        MENUITEM "가속",                          ID_40003
+        MENUITEM "감속",                          ID_40004
     END
-    POPUP "Game"
+    POPUP "방향"
     BEGIN
-        MENUITEM "Reset",                       ID_GAME_RESET
-        MENUITEM "Quit",                        ID_GAME_QUIT
+        MENUITEM "위아래",                         ID_40005
+        MENUITEM "왼쪽오른쪽",                       ID_40006
+        MENUITEM "모두",                          ID_40007
     END
+    POPUP "신호등"
+    BEGIN
+        MENUITEM "빨강",                          ID_40008
+        MENUITEM "파랑",                          ID_40009
+        MENUITEM "노랑",                          ID_40010
+        MENUITEM "자동",                          ID_40011
+    END
+    MENUITEM "건너기",                         ID_40012
 END
 
 #endif    // 한국어(대한민국) resources
