@@ -219,7 +219,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			if (!stop)
 				Timer2Count++;
 			printf("TimerCount1 : %d, TimerCount2 : %d Speed : %d\n", Timer1Count, Timer2Count, Speed);
-			printf("man.x : %d\n\n", man.x);
+			printf("side : %d updown : %d\n\n", side, updown);
 			//Traffic
 			{
 				if (autotraffic) {
@@ -235,9 +235,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		//끝자락 지났는지 검사
 		{
-			
-
-
 			if (car[0].y == WINDOWSIZE - car[0].ysize)
 			{
 				car0pass = true;
@@ -495,32 +492,30 @@ car[3].y += 5;
 		//방향 AI
 		{
 			if(!updown){
-				if (car[1].y > 325 && car[1].y < 575)
+				if (car[1].y > 225 && car[1].y < 575)
 				{
-					if (car[1].y >= 325)
-					{
 						car[0].y -= 5;
 						car[1].y -= 5;
-					}
+					
 				}
-				if (car[1].y >= 575 && car[1].y < 825)
+				if (car[1].y >= 575 && car[1].y < 925)
 				{
 					car[0].y += 5;
 					car[1].y += 5;
 				}
-				if (car[3].y > 325 && car[3].y < 600)
+				if (car[3].y > 225 && car[3].y < 600)
 				{
 						car[2].y -= 5;
 						car[3].y -= 5;
 				}
-				else if (600 < car[3].y && car[3].y <= 825)
+				else if (600 < car[3].y && car[3].y <= 925)
 				{
 					car[2].y += 5;
 					car[3].y += 5;
 				}
 			}
 			if (!side) {
-				if (car[5].x > 325 && car[5].x < 600)
+				if (car[5].x > 225 && car[5].x < 600)
 				{
 					if (car[5].x >= 300)
 					{
@@ -528,7 +523,7 @@ car[3].y += 5;
 						car[5].x -= 5;
 					}
 				}
-				if (car[5].x > 600 && car[5].x < 800)
+				if (car[5].x > 600 && car[5].x < 900)
 				{
 					if (car[5].x <= 800)
 					{
@@ -536,7 +531,7 @@ car[3].y += 5;
 						car[5].x += 5;
 					}
 				}
-				if (car[7].x > 325 && car[7].x < 600)
+				if (car[7].x > 225 && car[7].x < 600)
 				{
 					if (car[7].x >= 325)
 					{
@@ -544,13 +539,11 @@ car[3].y += 5;
 						car[7].x -= 5;
 					}
 				}
-				if (500 < car[6].x && car[6].x < 675)
+				if (500 < car[6].x && car[6].x < 775)
 				{
-					if (car[6].x <= 700)
-					{
 						car[6].x += 5;
 						car[7].x += 5;
-					}
+					
 				}
 			}
 		}
@@ -559,12 +552,13 @@ car[3].y += 5;
 		{
 			//AI ON/OFF
 			if (crossing) {
-				updown = false;
-				side = false;
+				
+				
 				autotraffic = false;
-				randcross = rand() % 2;
+				randcross = 0;
 				if (randcross == 0) {//좌우 건너기
 					if (traffic == 0 || traffic == 3) {
+						updown = false;
 						if (man.x < 500) {
 							goright = true;
 						}
@@ -573,6 +567,7 @@ car[3].y += 5;
 						}
 					}
 					else {
+						side = false;
 						if (man.y < 500) {
 							godown = true;
 						}
@@ -582,6 +577,7 @@ car[3].y += 5;
 					}
 				}
 				else {
+					
 					if ((man.x < 500 && man.y < 500))
 						rightdown = true;
 					else if ((man.x > 500 && man.y > 500))
@@ -603,7 +599,7 @@ car[3].y += 5;
 							goright = false;
 							updown = true;
 							side = true;
-							autotraffic = true;
+							//autotraffic = true;
 						}
 					}
 					else if (goleft) {
@@ -612,7 +608,7 @@ car[3].y += 5;
 							goleft = false;
 							updown = true;
 							side = true;
-							autotraffic = true;
+							//autotraffic = true;
 						}
 					}
 					else if (goup) {
@@ -621,7 +617,7 @@ car[3].y += 5;
 							goup = false;
 							updown = true;
 							side = true;
-							autotraffic = true;
+							//autotraffic = true;
 						}
 					}
 					else if (godown) {
@@ -630,7 +626,7 @@ car[3].y += 5;
 							godown = false;
 							updown = true;
 							side = true;
-							autotraffic = true;
+							//autotraffic = true;
 						}
 					}
 				}
