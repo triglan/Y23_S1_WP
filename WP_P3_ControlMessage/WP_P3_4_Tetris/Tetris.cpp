@@ -25,8 +25,6 @@ struct mainCharacter {
 	bool life = true;
 };
 
-
-
 //각 머리 + 꼬리당 구조체
 static mainCharacter brick[1000];
 
@@ -51,7 +49,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevIsntace, LPSTR lpszCmdPar
 	WndClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 	RegisterClassEx(&WndClass);
 
-	hWnd = CreateWindow(lpszClass, lpszWindowName, WS_OVERLAPPEDWINDOW, 600, 200, SIDE + 18, UP + 41, NULL, (HMENU)NULL, hInstance, NULL);
+	hWnd = CreateWindow(lpszClass, lpszWindowName, WS_OVERLAPPEDWINDOW, 600, 100, SIDE + 18, UP + 41, NULL, (HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 
@@ -72,9 +70,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	HBITMAP hBitmap;
 	RECT rt;
 
+	//보드
+	static int board[12][6];
 	//타이머
 	static int Timer1Count = 0;
-	static int wonSpeed = 100;
+	static int wonSpeed = 200;
 	
 	//기본 크기
 	static int xspace = 6;
@@ -88,6 +88,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static int a = 0, b = 0, c = 0;
 
 	static bool createBrick = false;
+	static bool breaking = false;
 	srand(time(NULL));
 	switch (uMsg)
 	{
@@ -95,8 +96,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		SetTimer(hwnd, 1, wonSpeed, NULL);
 		srand(time(NULL));
 		//블럭 생성
-		if (true) {
-			random = rand() % 5;
+		{
+			random = 3;
 			a = rand() % 256, b = rand() % 256, c = rand() % 256;
 			switch (random)
 			{
@@ -162,10 +163,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		default:
 			break;
 		}
+
+
 		if (Timer1Count % 10) {
+			//바닥과 충돌 시 정지, 블럭 아래로 떨어지기 마지막 ID일때만
 			for (int i = 0; i < brcount; i++)
 			{
-				if (brick[i].y >= yspace - 1 && brick[i].id == idcount - 1) //바닥과 충돌 시 정지, 마지막 ID일때만, TODO : 블럭과 충돌 시 도 넣어줘, 충돌 후 블럭 생성
+				if (brick[i].y >= yspace - 1 && brick[i].id == idcount - 1)
 				{
 					for (int j = 0; j < brcount; j++)
 					{
@@ -179,13 +183,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				if (brick[i].move == true) //떨어지기
 					brick[i].y++;
 			}
+			//플레이어와 블럭 충돌
 			for (int i = 0; i < brcount; i++)
 			{
 				//i는 플레이어 ID가 idcount - 1이면 플레이어, 아니면 다른 블럭
 				//플레이어와 다른 블럭의 충돌 체크 후 충돌이면 플레이어 블럭 전부 정지
 				if (brick[i].id == idcount - 1) {//플레이어면
 					for (int j = 0; j < brcount; j++) {
-						if (brick[i].x == brick[j].x && brick[i].y == brick[j].y && brick[j].id != idcount - 1) {//플레이어랑 플레이어 아닌 블럭
+						if (brick[i].x == brick[j].x && brick[i].y == brick[j].y && brick[j].id != idcount - 1 && brick[j].life == true) {//플레이어랑 플레이어 아닌 블럭
 							for (int k = 0; k < brcount; k++) {
 								if (brick[i].id == brick[k].id) {
 									brick[k].move = false;
@@ -197,6 +202,37 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					}
 				}
 			}
+			//한줄 시 삭제
+			{
+				//초기화 먼저
+				for (int y = 0; y < yspace; y++) {
+					for (int x = 0; x < xspace; x++) {
+						board[y][x] = 0;
+					}
+				}
+				//보드에 플레이어가 아닌 x,y값 집어넣기
+				for (int i = 0; i < brcount; i++){
+					if(brick[i].id != idcount - 1)
+						board[brick[i].y][brick[i].x] = 1;
+				}
+				//한 줄이 완성 되었을 때
+				for (int y = 0; y < yspace; y++) {
+					if (board[y][0] == 1 && board[y][1] == 1 && board[y][2] == 1 &&
+						board[y][3] == 1 && board[y][4] == 1 && board[y][5] == 1) {
+						for (int i = 0; i < brcount; i++){//삭제와 y가 더 위에 있는건 한칸 내림
+							if (brick[i].y == y) {
+								brick[i].life = 0;
+								brick[i].x = -1;
+								brick[i].y = -1;
+							}
+							if (brick[i].y < y) {
+								brick[i].y += 1;
+							}
+						}
+					}
+				}
+			}
+
 		}
 
 		if (createBrick == true) {
@@ -324,7 +360,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			for (int i = 0; i < brcount; i++)
 			{
-				if (brick[i].move == true)
+				if (brick[i].move == true && brick[i].y > 0)
 					brick[i].y--;
 			}
 		}
@@ -332,7 +368,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			for (int i = 0; i < brcount; i++)
 			{
-				if (brick[i].move == true)
+				if (brick[i].move == true && brick[i].y <= yspace - 1)
 					brick[i].y++;
 			}
 		}
@@ -343,6 +379,20 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				if (brick[i].move == true)
 					brick[i].x--;
 			}
+			//벽과 충돌 처리
+			for (int i = 0; i < brcount; i++) {
+				if (brick[i].x < 0 && brick[i].id == idcount - 1) {
+					for (int j = 0; j < brcount; j++) {
+						if (brick[i].id == brick[j].id && (brick[j].shape == 0 || brick[j].shape == 1 || brick[j].shape == 3)) {
+							brick[i].x++;
+						}
+						else if (brick[i].id == brick[j].id && (brick[j].shape == 2 || brick[j].shape == 4)) {
+							brick[i].x++;
+							break;
+						}
+					}
+				}
+			}
 		}
 		if (wParam == VK_RIGHT)
 		{
@@ -350,6 +400,60 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			{
 				if (brick[i].move == true)
 					brick[i].x++;
+			}
+			//벽과 충돌 처리
+			for (int i = 0; i < brcount; i++) {
+				if (brick[i].x > xspace - 1 && brick[i].id == idcount - 1) {
+					for (int j = 0; j < brcount; j++) {
+						if (brick[i].id == brick[j].id && (brick[j].shape == 0 || brick[j].shape == 1 || brick[j].shape == 3)) {
+							brick[i].x--;
+						}
+						else if (brick[i].id == brick[j].id && (brick[j].shape == 2 || brick[j].shape == 4)) {
+							brick[i].x--;
+							break;
+						}
+					}
+				}
+			}
+		}
+		if (wParam == VK_RETURN) {
+			for (int i = 0; i < brcount; i++){
+				if (brick[i].id == idcount - 1) {
+					switch (brick[i].shape){
+					case 1:
+						brick[i++].shape = 2;
+						brick[i].x++;
+						brick[i].y--;
+						brick[i].shape = 2;
+						break;
+					case 2:
+						brick[i++].shape = 1;
+						brick[i].x--;
+						brick[i].y++;
+						brick[i].shape = 1;
+						break;
+					case 3:
+						brick[i++].shape = 4;
+						brick[i].x++;
+						brick[i].y--;
+						brick[i++].shape = 4;
+						brick[i].x+=2;
+						brick[i].y-=2;
+						brick[i].shape = 4;
+						break;
+					case 4:
+						brick[i++].shape = 3;
+						brick[i].x--;
+						brick[i].y++;
+						brick[i++].shape = 3;
+						brick[i].x-=2;
+						brick[i].y+=2;
+						brick[i].shape = 3;
+						break;
+					default:
+						break;
+					}
+				}
 			}
 		}
 		InvalidateRect(hwnd, NULL, TRUE);

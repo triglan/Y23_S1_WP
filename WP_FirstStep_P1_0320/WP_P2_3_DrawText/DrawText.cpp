@@ -14,20 +14,20 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevIsntace, LPSTR lpszCmdPar
 	MSG Message;
 	WNDCLASSEX WndClass;
 	g_hInst = hInstance;
-
 	WndClass.cbSize = sizeof(WndClass);
-	WndClass.style = CS_HREDRAW | CS_VREDRAW;
+	WndClass.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
 	WndClass.lpfnWndProc = (WNDPROC)WndProc;
 	WndClass.cbClsExtra = 0;
 	WndClass.cbWndExtra = 0;
 	WndClass.hInstance = hInstance;
-	WndClass.hIcon = LoadCursor(NULL, IDI_APPLICATION);
+	WndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 	WndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
 	WndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	WndClass.lpszMenuName = NULL;
-	WndClass.lpszClassName = lpszClass;
+	WndClass.lpszClassName = lpszClass; // lpszClass;
 	WndClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 	RegisterClassEx(&WndClass);
+
 
 	hWnd = CreateWindow(lpszClass, lpszWindowName, WS_OVERLAPPEDWINDOW, 600, 300, 800, 600, NULL, (HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
@@ -40,52 +40,42 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevIsntace, LPSTR lpszCmdPar
 	return Message.wParam;
 }
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK WndProc
+(HWND hwnd, UINT iMessage, WPARAM wParam, LPARAM lParam
+)
 {
 	PAINTSTRUCT ps;
 	HDC hdc;
-	RECT rect;
-
-	TCHAR lpOut[100];
-	srand(time(NULL));
-
-	int x = rand() % 701;
-	int y = rand() % 501;
-	int n;	
-	int count = rand() % 41 + 10;
-	int r1 = rand() % 257, g1 = rand() % 257, b1 = rand() % 257;
-	int br1 = rand() % 257, bg1 = rand() % 257, bb1 = rand() % 257;
-
-	int i;
-	for (i = 0; i < count; i++)
-	{
-		n = rand() % 10;
-		lpOut[i] = n + 48;
+	HPEN hPen, oldPen
+		;
+	static int draw = 1;
+	switch (iMessage) {
+		case WM_PAINT:
+				hdc = BeginPaint(hwnd, &ps);
+				if
+					(draw) {
+					hPen = CreatePen(PS_DOT, 1, RGB(255, 0, 0));
+					oldPen = (HPEN)SelectObject
+						(hdc, hPen); 
+						Ellipse(hdc, 20, 20, 300, 300); // 선택한 펜으로 도형 그리기
+					SelectObject(hdc, oldPen); 
+					DeleteObject(hPen);
+				}
+				EndPaint
+				(hwnd, &ps);// DC 해제하기
+				break;
+				case WM_LBUTTONDBLCLK
+					:
+						draw++;
+						draw %= 2;
+						InvalidateRect
+						(hwnd, NULL, TRUE);
+						break;
+						case WM_DESTROY
+							:
+								PostQuitMessage(0);
+								break;
 	}
-	switch (uMsg)
-	{
-
-
-	case WM_CREATE:
-		break;
-	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-
-		rect.left = x;
-		rect.top = y;
-		rect.right = x+100;
-		rect.bottom = y+100;
-		SetBkColor(hdc, RGB(br1, bg1, bb1));
-		SetTextColor(hdc, RGB(r1, g1, b1));
-		//wsprintf(lpOut, L"abcdefghijklmnopqrstuvwxyzsl;gjreghioilajsdajsufhoefhweioufbhoabcdefghij");
-		DrawText(hdc, lpOut, i, &rect, DT_WORDBREAK | DT_CENTER | DT_EDITCONTROL); //--- 한 라인, 수직/수평 중앙=
-
-		EndPaint(hWnd, &ps);
-		break;
-	case WM_DESTROY:
-		PostQuitMessage(0);
-		break;
-	}
-
-	return DefWindowProc(hWnd, uMsg, wParam, lParam);
+	return (DefWindowProc
+	(hwnd, iMessage, wParam, lParam));
 }
