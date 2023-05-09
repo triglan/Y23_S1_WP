@@ -8,17 +8,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="background.cpp" />
+    <ClCompile Include="temp.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="picture.rc">
+    <ResourceCompile Include="Resource.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\..\Users\이규원\Downloads\Test_Rabbit.bmp">
+    <Image Include="bitmap2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Pictures\토끼.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
