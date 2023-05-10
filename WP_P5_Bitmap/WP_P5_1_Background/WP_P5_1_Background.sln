@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.33328.57
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P5_1_Background", "WP_P5_1_Background\WP_P5_1_Background.vcxproj", "{BC97CF5B-BEF3-47C2-A3EA-A372CF8AE761}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P5_3_Lens", "WP_P5_3_Lens\WP_P5_3_Lens.vcxproj", "{92AB73B4-F212-4679-B38B-8FF7D68631CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{BC97CF5B-BEF3-47C2-A3EA-A372CF8AE761}.Release|x64.Build.0 = Release|x64
 		{BC97CF5B-BEF3-47C2-A3EA-A372CF8AE761}.Release|x86.ActiveCfg = Release|Win32
 		{BC97CF5B-BEF3-47C2-A3EA-A372CF8AE761}.Release|x86.Build.0 = Release|Win32
+		{92AB73B4-F212-4679-B38B-8FF7D68631CC}.Debug|x64.ActiveCfg = Debug|x64
+		{92AB73B4-F212-4679-B38B-8FF7D68631CC}.Debug|x64.Build.0 = Debug|x64
+		{92AB73B4-F212-4679-B38B-8FF7D68631CC}.Debug|x86.ActiveCfg = Debug|Win32
+		{92AB73B4-F212-4679-B38B-8FF7D68631CC}.Debug|x86.Build.0 = Debug|Win32
+		{92AB73B4-F212-4679-B38B-8FF7D68631CC}.Release|x64.ActiveCfg = Release|x64
+		{92AB73B4-F212-4679-B38B-8FF7D68631CC}.Release|x64.Build.0 = Release|x64
+		{92AB73B4-F212-4679-B38B-8FF7D68631CC}.Release|x86.ActiveCfg = Release|Win32
+		{92AB73B4-F212-4679-B38B-8FF7D68631CC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
