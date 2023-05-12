@@ -50,7 +50,7 @@ END
 // Bitmap
 //
 
-IDB_BITMAP1             BITMAP                  "C:\\Users\\이규원\\Downloads\\Test_Rabbit.bmp"
+IDB_BITMAP1             BITMAP                  "D:\GitHub\Y23_S1_WP\WP_P5_Bitmap\WP_P5_1_Background\WP_P5_1_Background\Pictures"
 
 #endif    // 한국어(대한민국) resources
 /////////////////////////////////////////////////////////////////////////////

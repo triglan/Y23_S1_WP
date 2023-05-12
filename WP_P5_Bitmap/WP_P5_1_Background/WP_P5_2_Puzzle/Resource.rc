@@ -1,0 +1,99 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 한국어(대한민국) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP1             BITMAP                  "pictures\\picture1.bmp"
+
+IDB_BITMAP2             BITMAP                  "pictures\\picture2.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU
+BEGIN
+    POPUP "Picture"
+    BEGIN
+        MENUITEM "Picture_1",                   ID_PICTURE_PICTURE_1
+        MENUITEM "Picture_2",                   ID_PICTURE_PICTURE_2
+    END
+    POPUP "DevidePicture"
+    BEGIN
+        MENUITEM "Picture_3",                   ID_DEVIDEPICTURE_PICTURE_3
+        MENUITEM "Picture_4",                   ID_DEVIDEPICTURE_PICTURE_4
+        MENUITEM "Picture_5",                   ID_DEVIDEPICTURE_PICTURE_5
+    END
+    POPUP "Game"
+    BEGIN
+        MENUITEM "Game_Start",                  ID_GAME_GAMESTART
+        MENUITEM "Show_Picture",                ID_GAME_SHOW
+        MENUITEM "Reverse",                     ID_GAME_REVERSE
+        MENUITEM "Game_Quit",                   ID_GAME_Quit
+    END
+END
+
+#endif    // 한국어(대한민국) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
