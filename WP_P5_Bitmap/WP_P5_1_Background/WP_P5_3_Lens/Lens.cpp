@@ -64,7 +64,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static int rx, ry;//우클릭 마우스 좌표
 	static int startx, starty;
 	static bool lclick, rclick;
-	static bool reside = true, reup = true;
+	static bool reside = false, reup = false;
 
 	static pictures lens;
 	static pictures paste[5];
@@ -84,6 +84,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		hBitmap2 = (HBITMAP)LoadBitmap(g_hInst, MAKEINTRESOURCE(IDB_BITMAP2));
 		sx = -1, sy = -1, ex = -1, ey = -1;
 		lens.x = sx, lens.y = sy, lens.sx = ex - sx, lens.sy = ey - ex, lens.zoom = 0;
+		reside = false, reup = false;
 		SetTimer(hwnd, 1, 200, NULL);
 	}
 	break;
@@ -254,7 +255,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (wParam == 'r') {
 			scopy = SRCCOPY;
 
-			reside = true, reup = true;
+			reside = false, reup = false;
 
 			Timer1Count = 0;
 

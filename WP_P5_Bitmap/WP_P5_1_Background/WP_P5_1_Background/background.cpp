@@ -380,8 +380,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	case WM_KEYDOWN:
 		if (wParam == VK_LEFT) {
-			if(sel == 0)
+			if (sel == 0) {
+				if (pic[0].subx > pic[0].sx)
+					pic[0].subx = 0;
 				pic[0].subx += 10;
+			}
 			if(sel == 1)
 				pic[1].subx += 10;
 			if(sel == 2)
