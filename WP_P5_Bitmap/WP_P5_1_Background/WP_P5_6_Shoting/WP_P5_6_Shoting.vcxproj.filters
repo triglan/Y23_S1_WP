@@ -7,9 +7,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="소스.cpp" />
-    <ClCompile Include="temp2.cpp" />
-    <ClCompile Include="temp3.cpp" />
+    <ClCompile Include="Shoting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -20,22 +18,16 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bitmap1.bmp">
+    <Image Include="Pictures\Idle.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
     <Image Include="Pictures\background.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="pictures\bitmap3.bmp">
+    <Image Include="Pictures\PilotIdle.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
-    <Image Include="Pictures\AllDog.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Pictures\DogIdle.png">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Pictures\Idle.bmp">
+    <Image Include="Pictures\bbackground.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

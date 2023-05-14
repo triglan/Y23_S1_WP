@@ -50,19 +50,13 @@ END
 // Bitmap
 //
 
+IDB_BITMAP1             BITMAP                  "Pictures\\Idle.bmp"
+
 IDB_BITMAP2             BITMAP                  "Pictures\\background.bmp"
 
-IDB_BITMAP3             BITMAP                  "pictures\\bitmap3.bmp"
+IDB_BITMAP3             BITMAP                  "Pictures\\PilotIdle.bmp"
 
-IDB_BITMAP4             BITMAP                  "Pictures\\Idle.bmp"
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// PNG
-//
-
-IDB_PNG1                PNG                     "Pictures\\DogIdle.png"
+IDB_BITMAP4             BITMAP                  "Pictures\\bbackground.bmp"
 
 #endif    // 한국어(대한민국) resources
 /////////////////////////////////////////////////////////////////////////////

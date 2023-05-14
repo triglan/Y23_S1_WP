@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{0762da77-ef37-4b50-bd8f-db20013bf661}</ProjectGuid>
-    <RootNamespace>WPP54MouseAnimations</RootNamespace>
+    <ProjectGuid>{34d80c49-6f7c-4ea7-a34a-9782e7d88150}</ProjectGuid>
+    <RootNamespace>WPP55LockUp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,20 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animations.cpp" />
+    <ClCompile Include="Jail.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Pictures\background.bmp" />
-    <Image Include="Pictures\DogIdle.bmp" />
-    <Image Include="Pictures\Idle.bmp" />
-    <Image Include="Pictures\Jump.bmp" />
-    <Image Include="Pictures\Lying.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

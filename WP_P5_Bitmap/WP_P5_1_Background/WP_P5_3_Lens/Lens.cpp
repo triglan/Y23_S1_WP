@@ -201,7 +201,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					paste[pastec - 1].sx - 2 * (paste[pastec - 1].zoom * paste[pastec - 1].sx / 20), paste[pastec - 1].sy - 2 * (paste[pastec - 1].zoom * paste[pastec - 1].sy / 20), scopy);//1오른쪽사진
 			}
 
-			StretchBlt(hdc, 0, 0, 800, 800, memdc, 800, 0, 800, 800, scopy);
+			//StretchBlt(hdc, 0, 0, 800, 800, memdc, 800, 0, 800, 800, scopy);
 		}
 		
 		DeleteObject(hBrush);
