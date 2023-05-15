@@ -151,6 +151,7 @@
     <Image Include="Pictures\background.bmp" />
     <Image Include="Pictures\bbackground.bmp" />
     <Image Include="Pictures\Idle.bmp" />
+    <Image Include="Pictures\Lying.bmp" />
     <Image Include="Pictures\PilotIdle.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

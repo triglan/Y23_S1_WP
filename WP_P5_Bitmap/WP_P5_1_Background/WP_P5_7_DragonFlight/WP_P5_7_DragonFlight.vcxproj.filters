@@ -7,7 +7,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Shoting.cpp" />
+    <ClCompile Include="Shooting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -16,22 +16,5 @@
     <ResourceCompile Include="Resource.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Pictures\Idle.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Pictures\background.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Pictures\PilotIdle.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Pictures\bbackground.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="Pictures\Lying.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
   </ItemGroup>
 </Project>

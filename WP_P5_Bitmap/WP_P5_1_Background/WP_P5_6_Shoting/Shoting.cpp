@@ -54,7 +54,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
     WndClass.lpszClassName = lpszClass;
     WndClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
     RegisterClassEx(&WndClass);
-    hWnd = CreateWindow(lpszClass, lpszWindowName, WS_OVERLAPPEDWINDOW, 0, 0, 1280, 800, NULL, (HMENU)NULL, hInstance, NULL);
+    hWnd = CreateWindow(lpszClass, lpszWindowName, WS_OVERLAPPEDWINDOW, 200, 200, 1280, 800, NULL, (HMENU)NULL, hInstance, NULL);
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
     while (GetMessage(&Message, 0, 0, 0)) {
@@ -94,7 +94,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     HBRUSH hBrush, oldBrush;
     HPEN hPen, oldPen;
 
-    static CImage Characterimg, Monsterimg, Blockimg, Backimg;
+    static CImage Characterimg, Monsterimg, Blockimg, Backimg, Dying;
     static RECT rt;//
     static DWORD scopy = SRCCOPY;//반전색인지 아닌지
 
@@ -122,6 +122,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         PlayerImgY = 30;
         Characterimg.LoadFromResource(g_hInst, IDB_BITMAP3); // 캐릭터
         Monsterimg.LoadFromResource(g_hInst, IDB_BITMAP1); //  몬스터
+        Dying.LoadFromResource(g_hInst, IDB_BITMAP5); //  몬스터 죽음
         Blockimg.LoadFromResource(g_hInst, IDB_BITMAP2); // 블럭
         Backimg.LoadFromResource(g_hInst, IDB_BITMAP4); // 배경
         //imgSprite.Load(L"AllDog.bmp");
@@ -547,8 +548,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             for (int j = 0; j < 3; j++) {
                 if (Monster[i][j].Die == FALSE)
                     TransparentBlt(mdc, Monster[i][j].x, Monster[i][j].y, Size, Size, Monsterimg.GetDC(), 19 * MonsterAnimation, 0, 19, 18, RGB(235, 197, 241));
-                if (Monster[i][j].Die == TRUE && Monster[i][j].DeadTime < 3) {
-                    TransparentBlt(mdc, Monster[i][j].x, Monster[i][j].y, Size, Size, Monsterimg.GetDC(), 0, 410, 130, 130, RGB(235, 197, 241));
+                if (Monster[i][j].Die == TRUE && Monster[i][j].DeadTime < 5) {
+                    TransparentBlt(mdc, Monster[i][j].x, Monster[i][j].y, Size, Size, Dying.GetDC(), 19 * MonsterAnimation, 0, 19, 18, RGB(235, 197, 241));
                 }
             }
         }

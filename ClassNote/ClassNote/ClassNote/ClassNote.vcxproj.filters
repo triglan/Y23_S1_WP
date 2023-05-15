@@ -3,5 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Note.cpp" />
     <ClCompile Include="기말과제.cpp" />
+    <ClCompile Include="230515_5_7.cpp" />
   </ItemGroup>
 </Project>

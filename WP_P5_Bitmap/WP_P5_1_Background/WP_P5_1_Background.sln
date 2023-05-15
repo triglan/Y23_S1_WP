@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P5_5_LockUp", "WP_P5_5_L
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P5_6_Shoting", "WP_P5_6_Shoting\WP_P5_6_Shoting.vcxproj", "{4825083F-042E-4A3A-A9C6-D3A3AC9FF0CE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WP_P5_7_DragonFlight", "WP_P5_7_DragonFlight\WP_P5_7_DragonFlight.vcxproj", "{10404292-5F66-4149-A5D5-D5E2C035248A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{4825083F-042E-4A3A-A9C6-D3A3AC9FF0CE}.Release|x64.Build.0 = Release|x64
 		{4825083F-042E-4A3A-A9C6-D3A3AC9FF0CE}.Release|x86.ActiveCfg = Release|Win32
 		{4825083F-042E-4A3A-A9C6-D3A3AC9FF0CE}.Release|x86.Build.0 = Release|Win32
+		{10404292-5F66-4149-A5D5-D5E2C035248A}.Debug|x64.ActiveCfg = Debug|x64
+		{10404292-5F66-4149-A5D5-D5E2C035248A}.Debug|x64.Build.0 = Debug|x64
+		{10404292-5F66-4149-A5D5-D5E2C035248A}.Debug|x86.ActiveCfg = Debug|Win32
+		{10404292-5F66-4149-A5D5-D5E2C035248A}.Debug|x86.Build.0 = Debug|Win32
+		{10404292-5F66-4149-A5D5-D5E2C035248A}.Release|x64.ActiveCfg = Release|x64
+		{10404292-5F66-4149-A5D5-D5E2C035248A}.Release|x64.Build.0 = Release|x64
+		{10404292-5F66-4149-A5D5-D5E2C035248A}.Release|x86.ActiveCfg = Release|Win32
+		{10404292-5F66-4149-A5D5-D5E2C035248A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

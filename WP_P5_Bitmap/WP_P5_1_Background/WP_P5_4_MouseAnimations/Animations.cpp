@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include"resource.h"
 #include <atlimage.h>
+#include <atlImage.h>
 
 #define RIGHT 0
 #define LEFT 1
@@ -138,7 +139,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static CImage img, idle, jump, lying;
 	static RECT rt;//
 	static DWORD scopy = SRCCOPY;//반전색인지 아닌지
-
 	static int timer1 = 0;
 	static int jumptimer = 0;
 	static int w, h;
@@ -146,7 +146,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	static int move = 0;
 	static int state = 0;
 
-	static int moveSpeed = 10;
+	static int moveSpeed = 1;
 	static int imgsize = 50;
 
 	static bool sizeup = false;
@@ -169,13 +169,19 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg) {
 	case WM_CREATE:
 	{
+		//hdc = GetDC(hwnd);
+
 		img.LoadFromResource(g_hInst, IDB_BITMAP2); //--- background
 		idle.LoadFromResource(g_hInst, IDB_BITMAP1); //--- sprite image
 		jump.LoadFromResource(g_hInst, IDB_BITMAP3); //--- sprite image
 		lying.LoadFromResource(g_hInst, IDB_BITMAP4); //--- sprite image
 		GetClientRect(hwnd, &rt);
+		//img.Load(L"img.png");
+
 		NewChar();
 		SetTimer(hwnd, 1, 100, NULL);
+
+		//ReleaseDC(hwnd, hdc);
 	}
 	break;
 	case WM_TIMER:
@@ -202,24 +208,24 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					jumptimer++;
 					if (jumptimer < 6 * count) {
 						if (won[i].move == RIGHT || won[i].move == LEFT) {
-							won[i].y -= moveSpeed;
+							won[i].y -= moveSpeed * 10;
 						}
 						else if (won[i].move == DOWN) {
-							won[i].x += moveSpeed;
+							won[i].x += moveSpeed * 10;
 						}
 						else if (won[i].move == UP) {
-							won[i].x -= moveSpeed;
+							won[i].x -= moveSpeed * 10;
 						}
 					}
 					else if (jumptimer < 12 * count) {
 						if (won[i].move == RIGHT || won[i].move == LEFT) {
-							won[i].y += moveSpeed;
+							won[i].y += moveSpeed * 10;
 						}
 						else if (won[i].move == DOWN) {
-							won[i].x -= moveSpeed;
+							won[i].x -= moveSpeed * 10;
 						}
 						else if (won[i].move == UP) {
-							won[i].x += moveSpeed;
+							won[i].x += moveSpeed * 10;
 						}
 					}
 					else {
@@ -334,6 +340,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			break;
 		}
+		InvalidateRect(hwnd, NULL, false);
+		break;
 	case WM_PAINT:
 		hdc = BeginPaint(hwnd, &ps);
 		hBitmap = CreateCompatibleBitmap(hdc, rt.right, rt.bottom);
@@ -345,20 +353,23 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		h = img.GetHeight();
 
 		img.Draw(mdc, 0, 0, rt.right, rt.bottom, 0, 0, w, h); //--- 메모리 DC에 배경 그리기
+		//img.ReleaseDC();
 		
 		//캐릭터
 		{
-
 			for (int i = 0; i < count; i++)
 			{
 				if (changeAnim) {//changeAnim 우선
 					TransparentBlt(mdc, won[i].x, won[i].y, won[i].size, won[i].size, lying.GetDC(), 19 * timer1, 0, 19, 18, RGB(235, 197, 241));
+					lying.ReleaseDC();
 				}
 				else if (state == IDLE) {
 					TransparentBlt(mdc, won[i].x, won[i].y, won[i].size, won[i].size, idle.GetDC(), 19 * timer1, 0, 19, 18, RGB(235, 197, 241));
+					idle.ReleaseDC();
 				}
 				else if (state == JUMP) {
 					TransparentBlt(mdc, won[i].x, won[i].y, won[i].size, won[i].size, jump.GetDC(), 19 * timer1, 0, 18, 25, RGB(235, 197, 241));
+					jump.ReleaseDC();
 				}
 			}
 		}
@@ -367,7 +378,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		DeleteObject(hBitmap);
 		DeleteDC(mdc);
-
 		InvalidateRect(hwnd, NULL, false);
 		EndPaint(hwnd, &ps);
 		break;
@@ -384,6 +394,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		if (wParam == 't') {
 			NewChar();
+		}
+		if (wParam == 'q') {
+			PostQuitMessage(0);
 		}
 		if (wParam == 'a') {
 			if (zigzag) {
@@ -460,8 +473,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (clicked) {
 			for (int i = 0; i < count; i++)
 			{
-				my = rand() % 600 + 100;
-				mx = rand() % 600 + 100;
+				my = 10 * (rand() % 60) + 100;
+				mx = 10 * (rand() % 60) + 100;
 				angle = atan2(my - won[0].y, mx - won[0].x);
 				moveto = true;
 				if(changeAnim)
@@ -508,7 +521,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		InvalidateRect(hwnd, NULL, false);
 		break;
 	case WM_DESTROY:
-		DeleteObject(hBitmap);
+		//DeleteObject(hBitmap);
 		PostQuitMessage(0);
 		break;
 	}
@@ -518,8 +531,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 void NewChar() {
 	if (count >= 6)
 		return;
-	won[count].x = rand() % 700 + 50;
-	won[count].y = rand() % 700 + 50;
+	won[count].x = 10 * (rand() % 70) + 50;
+	won[count].y = 10 * (rand() % 70) + 50;
 	won[count].size = 50;
 	won[count].speed = 10;
 	won[count].state = IDLE;

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="230515_5_7.cpp" />
     <ClCompile Include="Note.cpp" />
     <ClCompile Include="기말과제.cpp" />
   </ItemGroup>
