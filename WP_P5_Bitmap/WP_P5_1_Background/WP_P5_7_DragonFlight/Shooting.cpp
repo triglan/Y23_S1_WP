@@ -6,7 +6,7 @@
 
 //투명 비트맵 처리 
 #pragma comment(lib, "msimg32.lib")
-#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+//#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 
 #define WINDOWSIZE 800
 
@@ -144,12 +144,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		NewEnemy();
 		NewEnemy();
 		NewEnemy();
-		NewEnemy();
-		NewEnemy();
-		NewEnemy();
-		NewEnemy();
-		NewEnemy();
-		NewEnemy();
 	}
 	break;
 	case WM_TIMER:
@@ -161,6 +155,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			back1timer++;
 			if (back1timer > h1 / 2)
 				back1timer = 0;
+			if (back1timer % 10 == 0) {
+				NewEnemy();
+			}
 		}
 		break;
 		case 2://백그라운드2
@@ -250,6 +247,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				if (IntersectRect(&rtemp, &enemy[i].rc, &bullet[j].rc)) {
 					enemy[i].dead = true;
 					DeleteBullet(j);
+<<<<<<< HEAD
+=======
+					
+>>>>>>> 6107bdef6bf06afab07aeb6fbf550fcf2aa34140
 				}
 			}
 		}
