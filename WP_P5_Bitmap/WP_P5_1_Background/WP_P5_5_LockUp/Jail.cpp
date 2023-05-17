@@ -30,7 +30,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
 	WndClass.lpszClassName = lpszClass;
 	WndClass.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
 	RegisterClassEx(&WndClass);
-	hWnd = CreateWindow(lpszClass, lpszWindowName, WS_OVERLAPPEDWINDOW, 0, 0, 800, 600, NULL, (HMENU)NULL, hInstance, NULL);
+	hWnd = CreateWindow(lpszClass, lpszWindowName, WS_OVERLAPPEDWINDOW, 400, 300, 800, 600, NULL, (HMENU)NULL, hInstance, NULL);
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 	while (GetMessage(&Message, 0, 0, 0)) {
@@ -39,7 +39,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
 	}
 	return Message.wParam;
 }
-
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
@@ -75,12 +74,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg) {
 	case WM_CREATE:
 		num = 0;
-		img.Load(L"bitmap1.bmp"); //--- background
+		img.Load(L"Pictures/back1.jpg"); //--- background
 		for (int i = 0; i < 30; i++) {
-			imgSprite[i][0].Load(L"bitmap3.bmp"); //--- sprite image
-			imgSprite[i][1].Load(L"bitmap5.bmp");
-			imgSprite[i][2].Load(L"bitmap6.bmp");
-			imgSprite[i][3].Load(L"bitmap5.bmp");
+			imgSprite[i][0].Load(L"Pictures/Idle.bmp"); //--- sprite image
+			imgSprite[i][1].Load(L"Pictures/Lying.bmp");
+			imgSprite[i][2].Load(L"Pictures/PilotIdle.bmp");
+			imgSprite[i][3].Load(L"Pictures/Lying.bmp");
 			x[i] = rand() % 750;
 			y[i] = 0;
 			down[i] = 0;
@@ -105,9 +104,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		img.Draw(mdc, 0, 0, rect.right, rect.bottom, 0, 0, w, h); //--- 메모리 DC에 배경 그리기
 		//TransparentBlt(mdc, xPos, yPos, 100, 100, imgSprite[num].GetDC(), 0, 0, 100, 100, RGB(255, 255, 255));
 		for (int i = 0; i < 30; i++) {
-			imgSprite[i][num].Draw(mdc, x[i], y[i], 60, 60, 0, 0, 100, 100);
+			//imgSprite[i][num].Draw(mdc, x[i], y[i], 60, 60, 0, 0, 20, 20);
+			TransparentBlt(mdc, x[i], y[i], 60, 60, imgSprite[i][num].GetDC(), 0, 0, 100, 100, RGB(235, 197, 241));
 		}
-		hbr = CreateSolidBrush(RGB(255, 0, 0)); // GDI: 브러시 만들기
+		hbr = CreateSolidBrush(RGB(0, 255, 255)); // GDI: 브러시 만들기
 		oldbr = (HBRUSH)SelectObject(mdc, hbr);
 		FrameRect(mdc, &gl, hbr); // 그리기
 		SelectObject(mdc, oldbr);

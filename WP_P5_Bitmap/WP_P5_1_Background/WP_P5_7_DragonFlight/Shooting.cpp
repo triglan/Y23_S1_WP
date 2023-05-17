@@ -250,7 +250,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				if (IntersectRect(&rtemp, &enemy[i].rc, &bullet[j].rc)) {
 					enemy[i].dead = true;
 					DeleteBullet(j);
-					NewEnemy();
 				}
 			}
 		}
