@@ -255,7 +255,7 @@ BOOL CALLBACK Dlalog_Proc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				}
 				i++;
 			}
-			for (int j = 0; j < c / 2; j++)
+			for (int j = 0; j <= c / 2; j++)
 			{
 				temp[0] = num[j];
 				num[j] = num[c - j];

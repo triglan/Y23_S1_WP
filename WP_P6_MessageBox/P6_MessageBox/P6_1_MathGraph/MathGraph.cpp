@@ -107,7 +107,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		// sin 함수 그리기
 		if (curvenum == 0) {
-			hPen = CreatePen(PS_DOT, 2, RGB(col[0], col[1], col[2])); // GDI: 펜 만들기
+			hPen = CreatePen(PS_DOT, 4, RGB(col[0], col[1], col[2])); // GDI: 펜 만들기
 			oldPen = (HPEN)SelectObject(mdc, hPen); // 새로운 펜 선택하기
 			MoveToEx(mdc, movex[0], clientHeight / 2, NULL);
 			for (int x = 0; x <= 1080; x++)
@@ -141,7 +141,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			// 원 그리기
 			//int radius = 100;
 			double mx = 0;
-			hPen = CreatePen(PS_DOT, 2, RGB(col[0], col[1], col[2])); // GDI: 펜 만들기
+			hPen = CreatePen(PS_DOT, 4, RGB(col[0], col[1], col[2])); // GDI: 펜 만들기
 			oldPen = (HPEN)SelectObject(mdc, hPen); // 새로운 펜 선택하기
 			MoveToEx(mdc, 100 + movex[0], clientHeight / 2, NULL);
 			for (int angle = 0; angle < 1080; angle++)
@@ -181,7 +181,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		}
 		else if (curvenum == 2) {
 			int y;
-			hPen = CreatePen(PS_DOT, 2, RGB(col[0], col[1], col[2])); // GDI: 펜 만들기
+			hPen = CreatePen(PS_DOT, 4, RGB(col[0], col[1], col[2])); // GDI: 펜 만들기
 			oldPen = (HPEN)SelectObject(mdc, hPen); // 새로운 펜 선택하기
 			MoveToEx(mdc, movex[0], clientHeight / 2, NULL);
 			for (int x = 0; x <= 800; x++) {
@@ -220,9 +220,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					y = movey / 100 * (x - 800) + clientHeight / 2;
 				}
 				LineTo(mdc, x + movex[1], y);
-				SelectObject(mdc, oldPen); // 이전의 펜으로 돌아감
-				DeleteObject(hPen);
 			}
+			SelectObject(mdc, oldPen); // 이전의 펜으로 돌아감
+			DeleteObject(hPen);
 			if (cirmove == 1) {
 				if (0 <= ex && ex < 100) {
 					ey = movey / 100 * ex + clientHeight / 2;
@@ -477,8 +477,6 @@ BOOL CALLBACK Dlalog_Proc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			cirmove = 0;
 			movexs = 0;
 			moveys = 0;
-			sx = 0;
-			sy = 0;
 			movex[0] = 0;
 			movex[1] = -1080;
 			movey = 100;
@@ -488,8 +486,6 @@ BOOL CALLBACK Dlalog_Proc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			cirmove = 0;
 			movexs = 0;
 			moveys = 0;
-			sx = 0;
-			sy = 0;
 			movex[0] = -100;
 			movex[1] = -855;
 			movey = 100;
@@ -499,8 +495,6 @@ BOOL CALLBACK Dlalog_Proc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			cirmove = 0;
 			movexs = 0;
 			moveys = 0;
-			sx = 0;
-			sy = 0;
 			movex[0] = 0;
 			movex[1] = -800;
 			movey = 100;
@@ -510,8 +504,6 @@ BOOL CALLBACK Dlalog_Proc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			cirmove = 0;
 			movexs = 0;
 			moveys = 0;
-			sx = 0;
-			sy = 0;
 			movex[0] = 0;
 			movex[1] = -800;
 			movey = 100;
