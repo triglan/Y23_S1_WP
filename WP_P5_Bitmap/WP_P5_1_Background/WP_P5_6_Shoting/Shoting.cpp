@@ -547,7 +547,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 3; j++) {
                 if (Monster[i][j].Die == FALSE)
-                    TransparentBlt(mdc, Monster[i][j].x, Monster[i][j].y, Size, Size, Monsterimg.GetDC(), 19 * MonsterAnimation, 0, 19, 18, RGB(235, 197, 241));
+                    TransparentBlt(mdc, Monster[i][j].x, Monster[i][j].y, Size,     Size, Monsterimg.GetDC(), 19 * MonsterAnimation, 0, 19, 18, RGB(235, 197, 241));
                 if (Monster[i][j].Die == TRUE && Monster[i][j].DeadTime < 5) {
                     TransparentBlt(mdc, Monster[i][j].x, Monster[i][j].y, Size, Size, Dying.GetDC(), 19 * MonsterAnimation, 0, 19, 18, RGB(235, 197, 241));
                 }
