@@ -170,7 +170,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			trap[trapc].life = true;
 			trap[trapc++].s = TRAPSIZE;
 		}
-		//temp
 	}
 	break;
 	case WM_TIMER:
@@ -672,8 +671,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 			if (camera == 1) {//포커스 화면
 				if (gameover == true) {
-
-
 					TextOut(mdc, 350, 380, L"GameOver", lstrlen(L"GameOver"));
 					_stprintf_s(getTime, L"시간 : %.2f초", timer);
 					TextOut(mdc, 350, 400, getTime, lstrlen(getTime));

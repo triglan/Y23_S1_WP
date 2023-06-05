@@ -235,9 +235,9 @@ BOOL CALLBACK ModelessDlgProc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam
     case WM_INITDIALOG:
         SetTimer(hDlg, 1, 20, NULL);
         hList = GetDlgItem(hDlg, IDC_LIST1);
-        SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)L"#include");
-        SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)L"int main");
-        SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)L"proc");
+        SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)L"Alpha");
+        SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)L"Beta");
+        SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)L"Delta");
         break;
 
     case WM_COMMAND:
@@ -264,6 +264,7 @@ BOOL CALLBACK ModelessDlgProc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam
             break;
 
         case IDC_RADIO5:
+            MainShape.shapenum = 1;
             Color[0] = 0;
             Color[1] = 0;
             Color[2] = 255;
@@ -329,12 +330,10 @@ BOOL CALLBACK ModelessDlgProc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam
                     if (Button6X <= 10)
                         goRight = true;
                 }
-
             }
-
+            InvalidateRect(hDlg, NULL, FALSE);
             break;
         }
-        InvalidateRect(hDlg, NULL, FALSE);
         break;
 
     case WM_PAINT:
